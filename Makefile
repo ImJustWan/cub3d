@@ -3,12 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+         #
+#    By: mrony <mrony@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 13:08:34 by tgibier           #+#    #+#              #
-#    Updated: 2023/10/11 14:23:22 by tgibier          ###   ########.fr        #
+#    Updated: 2023/10/11 15:33:35 by mrony            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+-include mk/includes.mk
+-include mk/sources.mk
+-include mk/colors.mk
 
 # Das Progamm
 NAME			=	cub3d
@@ -53,38 +57,46 @@ MAKEFLAGS		=	--no-print-directory
 all	:	$(MLX) $(LIBFT) ${NAME}
 
 $(OBJS_PATH)/%.o	: $(SRCS_PATH)/%.c
-		@mkdir -p $(OBJS_PATH)
-		@printf "$(_FOREST_GREEN)🛸 Preparing for landing... %-50s \r" $@
-		@$(CC) $(CFLAGS) -c $< -o $@ $(HEAD)
-		@echo "$(_EMMERALD)Cub3D: .obj/ folder created$(_END)"
+	@mkdir -p $(OBJS_PATH)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(HEAD)
+	@printf "$(_FOREST_GREEN)🐛 Falling asleep... %-50s \r" $@
+
+$(OBJS_PATH):
+	@mkdir -p $(OBJS_PATH)
+	@echo "$(_EMMERALD)Cub3D: .obj/ folder created$(_END)"
 
 $(LIBFT)	:
-		@echo "$(_GOLD)Summoning libft's genie$(_END)"
-		@make -sC $(LIBFT_PATH)
+	@echo "$(_GOLD)$(_END)"
+	@make -sC $(LIBFT_PATH)
 
 $(MLX)		: 
-		@echo "Crafting MiniLibX"
-		@make -sC $(MLX_PATH)
+	@echo "Crafting MiniLibX"
+	@make -sC $(MLX_PATH)
 
-$(NAME) 	: $(OBJS) $(LIBFT) $(MLX)
-		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(MLX) $(LDFLAGS) $(MLXFLAGS)
-		@echo "\n 👾$(_FOREST_GREEN)$(_BOLD) DOWN THE RABBIT HOLE, WOOP WOOP $(_END)👾"
+$(NAME) 	: $(OBJS_PATH) $(OBJS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(MLX) $(LDFLAGS) $(MLXFLAGS)
+	@echo "\n🐇$(_FOREST_GREEN)$(_BOLD) DOWN THE RABBIT HOLE WE GO $(_END)🐇"
 
 clean:
-	@echo "$(_AQUAMARINE) Which potion will it be ? $(_END)"
+	@echo "$(_AQUAMARINE)Which potion will it be ? $(_END)"
 	@rm -rf $(OBJS_PATH)
 	@rm -rf $(OBJS)
 	@make clean -C $(LIBFT_PATH)
 	@make clean -C $(MLX_PATH)
 	
-
 fclean:	clean
-	@echo "$(_AQUAMARINE)$(_BOLD)🚀 Leaving Wonderland 🚀$(_END)"
+	@echo "$(_AQUAMARINE)$(_BOLD)🗝️ Leaving Wonderland 🎩$(_END)"
 	@rm -rf $(NAME)
 	@rm -f $(LIBFT_PATH)$(LIBFT_NAME)
 
 re:	fclean all
 
 -include $(DEPS)
+
+gmk:
+	@if [ -d mk ];then echo ok;else mkdir mk;fi
+	@find -path './src/*' -name '*.c' | sed 's/^/SRCS += /' > mk/sources.mk
+	@find -path './inc/*' -name '*.h' | sed 's/^/INCLUDES += /' > mk/includes.mk
+
 
 .PHONY:	all clean fclean re

@@ -31,14 +31,14 @@ NAME		:=	libft.a
 ${NAME}: ${OBJFLDR} ${OBJS} $(INCLUDES)
 		@${MAKELIB} ${NAME} ${OBJS}
 		@ranlib ${NAME}
-		@echo "\n🧞$(_FOREST_GREEN)$(_BOLD) Libft's genie is ready too grant you wishes $(_END)🧞"
+		@echo "\n🎩$(_FOREST_GREEN)$(_BOLD) Mad hatter's library ready for the unbirthday party $(_END)🍰"
 
 all:	${NAME}
 
 .objs/%.o:	%.c
 		@mkdir -p $(dir $@)
 		@${CC} ${CFLAGS} -c $< -o $@ ${INC}
-		@printf "$(_FOREST_GREEN)🪔 Rubbing the magic lamp... %-50s \r" $@
+		@printf "$(_FOREST_GREEN)🫖 brewing the tea... %-50s \r" $@
 
 ${OBJFLDR}:
 		@mkdir -p ${OBJFLDR}
@@ -51,7 +51,7 @@ clean:
 fclean: clean
 		@${DEL} ${NAME}
 		@echo "$(_AQUAMARINE)libft: Object files & folders deleted$(_END)"
-		@echo "$(_AQUAMARINE)$(_BOLD)🧹 libft Cleaned the mess 🧹$(_END)"
+		@echo "$(_AQUAMARINE)$(_BOLD)🧑‍🤝‍🧑 tweedle dum and tweedle dee leaving with libft 🧑‍🤝‍🧑$(_END)"
 
 re:		fclean all
 
