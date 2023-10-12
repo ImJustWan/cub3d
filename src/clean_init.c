@@ -12,10 +12,10 @@ int	clean_init(t_world *world)
 	world->img.bpp = 0;
 	world->img.line_len = 0;
 	world->img.endian = 0;
-	world->pos_x = 4;
-	world->pos_y = 3;
-	world->player_x = (int)(world->pos_x + 0.5);
-	world->player_y = (int)(world->pos_y + 0.5);
+	world->pos.x = 4;
+	world->pos.y = 3;
+	world->player.x = (int)(world->pos.x + 0.5);
+	world->player.y = (int)(world->pos.y + 0.5);
 	world->ray.cos = 0;
 	world->ray.sin = 0;
 	world->ray.limit = 8;

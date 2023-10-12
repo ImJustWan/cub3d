@@ -27,6 +27,8 @@
 # define WIDTH  800
 # define HEIGHT 800
 
+typedef struct s_hat t_hat;
+
 typedef struct s_complex
 {
 	double	x;
@@ -51,21 +53,18 @@ typedef struct s_raycast
 	float	half_cam_field;
 }	t_raycast;
 
-
 typedef struct s_world // WOndeRlanD
 {
 	void		*mlx;
 	void		*win;
-	float		pos_x;
-	float		pos_y;
-	float		player_x;
-	float		player_y;
 	char		**map;
 	double		time;
 	double		old_time;
 	t_img		img;
+	t_hat		*hat;
+	t_complex	pos;
+	t_complex	player;
 	t_raycast	ray;
-
 }	t_world;
 
 int	clean_init(t_world *world);
