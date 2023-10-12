@@ -3,7 +3,7 @@
 
 # include "wonderland.h"
 
-int	hook_loop(int button, int x, int y, t_world *world);
+int	loop(int button, int x, int y, t_world *world);
 int	handle_keys(int button, int x, int y, t_world *world);
 int	handle_mouse(int button, int x, int y, t_world *world);
 

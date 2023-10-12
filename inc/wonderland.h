@@ -42,16 +42,30 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_raycast
+{
+	float	cos;
+	float	sin;
+	float	limit;
+	float	orientation;
+	float	half_cam_field;
+}	t_raycast;
+
+
 typedef struct s_world // WOndeRlanD
 {
 	void		*mlx;
 	void		*win;
+	float		pos_x;
+	float		pos_y;
+	float		player_x;
+	float		player_y;
+	char		**map;
 	double		time;
 	double		old_time;
 	t_img		img;
-	t_complex	pos;
-	t_complex	dir;
-	t_complex	cam_field;
+	t_raycast	ray;
+
 }	t_world;
 
 int	clean_init(t_world *world);
