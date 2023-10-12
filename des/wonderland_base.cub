@@ -1,0 +1,15 @@
+NO ./png/wonderland_wall_north
+SO ./png/wonderland_wall_south
+WE ./png/wonderland_wall_west
+EA ./png/wonderland_wall_east
+
+F 179, 144, 96
+C 159, 228, 245
+
+111
+1011111
+1001001
+1010011
+1000N01
+1110001
+  11111
