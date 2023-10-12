@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "wonderland.h": "c",
+        "display.h": "c"
+    }
+}

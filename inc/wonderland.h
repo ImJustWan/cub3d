@@ -1,5 +1,5 @@
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef WONDERLAND_H
+# define WONDERLAND_H
 
 # include <stddef.h>
 # include <stdlib.h>
@@ -12,8 +12,6 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <sys/ioctl.h>
 # include <asm/termbits.h>
 # include <sys/ioctl.h>
@@ -22,7 +20,41 @@
 # include <X11/X.h>
 # include <math.h>
 # include "mlx.h"
+# include "keys.h"
 # include "libft.h"
 # include "colors.h"
+
+# define WIDTH  800
+# define HEIGHT 800
+
+typedef struct s_complex
+{
+	double	x;
+	double	y;
+}	t_complex;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_world // WOndeRlanD
+{
+	void		*mlx;
+	void		*win;
+	double		time;
+	double		old_time;
+	t_img		img;
+	t_complex	pos;
+	t_complex	dir;
+	t_complex	cam_field;
+}	t_world;
+
+int	clean_init(t_world *world);
+int	clean_exit(t_world *world);
 
 #endif
