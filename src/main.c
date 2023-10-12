@@ -5,6 +5,7 @@ int	main(int argc, char **argv)
 {
 	t_world	world;
 
+
 	(void)argc;
 	(void)argv;
 	clean_init(&world);
@@ -12,6 +13,7 @@ int	main(int argc, char **argv)
 	if (!world.mlx)
 		return (1);
 	window_init(&world);
+
 	clean_exit(&world);
 	return (1);
 }

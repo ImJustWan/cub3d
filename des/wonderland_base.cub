@@ -1,7 +1,7 @@
-NO ./png/wonderland_wall_north
-SO ./png/wonderland_wall_south
-WE ./png/wonderland_wall_west
-EA ./png/wonderland_wall_east
+NO ./xpm/wonderland_wall_north
+SO ./xpm/wonderland_wall_south
+WE ./xpm/wonderland_wall_west
+EA ./xpm/wonderland_wall_east
 
 F 179, 144, 96
 C 159, 228, 245
