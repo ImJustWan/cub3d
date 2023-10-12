@@ -17,5 +17,14 @@ int	clean_init(t_world *world)
 	world->dir.y = 0;
 	world->cam_field.x = 0;
 	world->cam_field.y = 0;
+	world->pos.x = 4;
+	world->pos.y = 3;
+	world->player.x = (int)(world->pos.x + 0.5);
+	world->player.y = (int)(world->pos.y + 0.5);
+	world->ray.cos = 0;
+	world->ray.sin = 0;
+	world->ray.limit = 8;
+	world->ray.orientation = 0; // depending on N(0)/ S(90)/ E(180)/ W(270);
+	world->ray.half_cam_field = 30;
 	return (0);
 }
