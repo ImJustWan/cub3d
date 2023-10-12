@@ -27,7 +27,7 @@
 # define WIDTH  800
 # define HEIGHT 800
 
-typedef struct s_hat t_hat;
+typedef struct s_hat	t_hat;
 
 typedef struct s_complex
 {
@@ -37,11 +37,13 @@ typedef struct s_complex
 
 typedef struct s_img
 {
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
+	void			*img_ptr;
+	unsigned int	*buff;
+	int				bpp;
+	int				width;
+	int				height;
+	int				line_len;
+	int				endian;
 }	t_img;
 
 typedef struct s_raycast
@@ -55,12 +57,13 @@ typedef struct s_raycast
 
 typedef struct s_world // WOndeRlanD
 {
-	void		*mlx;
+	void		*mlx_ptr;
 	void		*win;
 	char		**map;
 	double		time;
 	double		old_time;
-	t_img		img;
+	t_img		*img;
+	t_img		*background;
 	t_hat		*hat;
 	t_complex	pos;
 	t_complex	player;

@@ -6,7 +6,7 @@
 #    By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 13:08:34 by tgibier           #+#    #+#              #
-#    Updated: 2023/10/12 11:22:16 by tgibier          ###   ########.fr        #
+#    Updated: 2023/10/12 16:56:18 by tgibier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,15 @@ fclean:	clean
 	@make clean -C minilibx-linux
 
 re:	fclean all
+
+cle: 
+	@echo "$(_AQUAMARINE)Clearing Cub3d files $(_END)"
+	@rm -rf $(OBJS_PATH)
+	@rm -rf $(OBJS)
+	@rm -rf $(NAME)
+	@rm -rf $(BONUS)
+
+cub: cle all
 
 gmk:
 		@if [ -d mk ];then echo ok;else mkdir mk;fi

@@ -8,9 +8,8 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	clean_init(&world);
-//	PARSING
-	world.mlx = mlx_init();
-	if (!world.mlx)
+	world.mlx_ptr = mlx_init();
+	if (!world.mlx_ptr)
 		return (1);
 	window_init(&world);
 	clean_exit(&world);
