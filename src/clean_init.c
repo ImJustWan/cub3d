@@ -17,5 +17,5 @@ int	clean_init(t_world *world)
 	world->dir.y = 0;
 	world->cam_field.x = 0;
 	world->cam_field.y = 0;
-    return (0);
+	return (0);
 }
