@@ -47,11 +47,11 @@ typedef struct s_world // WOndeRlanD
 	void		*mlx;
 	void		*win;
 	double		time;
-	double		old_time;
+	double		old_time; // 
 	t_img		img;
-	t_complex	pos;
-	t_complex	dir;
-	t_complex	cam_field;
+	t_complex	pos; // position of player at start
+	t_complex	dir; // vector of dir where player looks
+	t_complex	cam_field; // field of view width
 }	t_world;
 
 int	clean_init(t_world *world);
