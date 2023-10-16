@@ -1,5 +1,6 @@
 SRCS += ./src/main.c
 SRCS += ./src/clean_init.c
+SRCS += ./src/display/colors.c
 SRCS += ./src/display/loop.c
 SRCS += ./src/display/raycast.c
 SRCS += ./src/display/start.c

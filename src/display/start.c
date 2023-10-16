@@ -10,6 +10,13 @@ int	init_player(t_world *world, t_player *player)
 	return (0);
 }
 
+int	init_setup(t_world *world)
+{
+	world->setup->ceiling = ft_encode_rgb(102, 0, 102);
+	world->setup->floor = ft_encode_rgb(255, 153, 51);
+	return (0);
+}
+
 int	init_mlx(t_world *world)
 {
 	world->mlx_ptr = mlx_init();
@@ -21,7 +28,7 @@ int	init_mlx(t_world *world)
 	world->img->img_ptr = mlx_new_image(world->mlx_ptr, WIDTH, HEIGHT);
 	if (!world->img->img_ptr)
 		return (1);
-	world->img->buff = mlx_get_data_addr(world->img->img_ptr, \
+	world->img->buff = (int *)mlx_get_data_addr(world->img->img_ptr, \
 		&(world->img->bpp), &(world->img->line_len), &(world->img->endian));
 	if (!world->img->buff)
 		return (1);
@@ -32,6 +39,7 @@ void	start(t_world *world)
 {
 	init_mlx(world);
 	init_player(world, world->player);
-	mlx_hook(world->win, DESTROY, 0, clean_exit, world);
-	mlx_loop(world->mlx_ptr);
+	init_setup(world);
+	loop(world);
+
 }
