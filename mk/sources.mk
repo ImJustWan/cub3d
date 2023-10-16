@@ -1,6 +1,8 @@
 SRCS += ./src/main.c
 SRCS += ./src/clean_init.c
-SRCS += ./src/parsing/hat_list_functions.c
+SRCS += ./src/parsing/parsing_map.c
+SRCS += ./src/parsing/parsing_utils.c
+SRCS += ./src/parsing/parsing_read.c
 SRCS += ./src/parsing/parsing.c
 SRCS += ./src/display/window_init.c
 SRCS += ./src/error/error.c
@@ -8,3 +10,4 @@ SRCS += ./src/hooks/hook_loop.c
 SRCS += ./src/hooks/mouse_hooks.c
 SRCS += ./src/hooks/keys_hooks.c
 SRCS += ./src/clean_exit.c
+SRCS += ./src/utils.c

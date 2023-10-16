@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrony <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:18:34 by mrony             #+#    #+#             */
-/*   Updated: 2022/11/28 12:17:47 by mrony            ###   ########.fr       */
+/*   Updated: 2023/10/16 15:05:34 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		else
 		{
 			tmp = ft_lstlast(*lst);
+			new->prev = tmp;
 			tmp->next = new;
 		}
 	}
