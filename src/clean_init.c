@@ -1,31 +1,24 @@
 #include "wonderland.h"
 
-int	img_init(t_world *world)
-{
-	world->img->img_ptr = NULL;
-	world->img->buff = NULL;
-	world->img->bpp = 0;
-	world->img->line_len = 0;
-	world->img->endian = 0;
-	return (0);
-}
-
 int	clean_init(t_world *world)
 {
 	world->mlx_ptr = NULL;
 	world->win = NULL;
-	world->img = NULL;
 	world->time = 0;
 	world->old_time = 0;
-	world->pos.x = 4;
-	world->pos.y = 3;
-	world->player.x = (int)(world->pos.x + 0.5);
-	world->player.y = (int)(world->pos.y + 0.5);
-	world->ray.cos = 0;
-	world->ray.sin = 0;
-	world->ray.limit = 8;
-	world->ray.orientation = 0;
-	world->ray.half_cam_field = 30;
+	world->map = NULL;
+	world->img = malloc(sizeof(t_img));
+	if (!world->img)
+		return (1);
+	world->ray = malloc(sizeof(t_raycast));
+	if (!world->ray)
+		return (1);
+	world->setup = malloc(sizeof(t_setup));
+	if (!world->setup)
+		return (1);
+	world->player = malloc(sizeof(t_player));
+	if (!world->player)
+		return (1);
 	return (0);
 }
 

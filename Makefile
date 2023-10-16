@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/11 13:08:34 by tgibier           #+#    #+#              #
-#    Updated: 2023/10/12 16:56:18 by tgibier          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 -include mk/includes.mk
 -include mk/sources.mk
@@ -52,26 +41,26 @@ OBJS			=	$(addprefix $(OBJS_PATH)/, $(OBJS_NAMES))
 
 MAKEFLAGS		=	--no-print-directory
 
-all	:	$(MLX) $(LIBFT) ${NAME}
+all : ${NAME}
 
 $(OBJS_PATH)/%.o : %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@ $(HEAD)
 	@printf "$(_FOREST_GREEN)🐛 Falling asleep... %-50s \r" $@
 
-$(OBJS_PATH):
+$(OBJS_PATH) :
 	@mkdir -p $(OBJS_PATH)
 	@echo "$(_EMMERALD)Cub3D: .obj/ folder created$(_END)"
 
-$(LIBFT)	:
-	@echo "$(_GOLD)Summoning libft's genie$(_END)"
+$(LIBFT) :
+	@echo "$(_GOLD)Summoning libft's madhatter$(_END)"
 	@make -sC $(LIBFT_PATH)
 
-$(MLX)		: 
+$(MLX) : 
 	@echo "$(_LILAC)Crafting MiniLibX$(_END)"
 	@make -sC $(MLX_PATH)
 
-$(NAME) 	: $(LIBFT) $(MLX) $(OBJS_PATH) $(OBJS)
+$(NAME) : $(LIBFT) $(MLX) $(OBJS_PATH) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(LDFLAGS) $(MLX) $(MLXFLAGS)
 	@echo "\n🐇$(_FOREST_GREEN)$(_BOLD) DOWN THE RABBIT HOLE WE GO $(_END)🐇"
 
@@ -86,8 +75,7 @@ fclean:	clean
 	@echo "$(_AQUAMARINE)$(_BOLD)🗝️ Leaving Wonderland 🎩$(_END)"
 	@rm -rf $(NAME)
 	@rm -rf $(BONUS)
-	@make clean -C libft
-	@make clean -C minilibx-linux
+	@make fclean -C libft
 
 re:	fclean all
 

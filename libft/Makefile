@@ -4,60 +4,60 @@
 -include make/sources.mk
 -include make/colors.mk
 
-INCPATH		:=	inc/
-INC			:=	-I $(INCPATH)
+INCPATH	:=    inc/
+INC	    :=    -I $(INCPATH)
 
 ################# FOLDER PATHS ##################
 
-OBJFLDR		:=	.objs/
+OBJFLDR	:=    .objs/
 
 #################### SOURCES ####################
 
-OBJS		:=	$(SOURCES:.c=.o)
-OBJS		:=	$(addprefix $(OBJFLDR), $(OBJS))
+OBJS	:=    $(SOURCES:.c=.o)
+OBJS	:=    $(addprefix $(OBJFLDR), $(OBJS))
 
-CC			:=	gcc
+CC	    :=    gcc
 
-CFLAGS		:=	-Wall -Wextra -Werror -g
+CFLAGS	:=    -Wall -Wextra -Werror -g
 
-MAKELIB		:=	ar -rcs
+MAKELIB	:=    ar -rcs
 
-DEL			:=	rm -rf
+DEL	    :=    rm -rf
 
-NAME		:=	libft.a
+NAME	:=    libft.a
 
 ####################  RULES  ####################
 
 ${NAME}: ${OBJFLDR} ${OBJS} $(INCLUDES)
-		@${MAKELIB} ${NAME} ${OBJS}
-		@ranlib ${NAME}
-		@echo "\n🎩$(_FOREST_GREEN)$(_BOLD) Mad hatter's library ready for the unbirthday party $(_END)🍰"
+	@${MAKELIB} ${NAME} ${OBJS}
+	@ranlib ${NAME}
+	@echo "\n🎩$(_FOREST_GREEN)$(_BOLD) Mad hatter's library ready for the unbirthday party $(_END)🍰"
 
-all:	${NAME}
+all:    ${NAME}
 
-.objs/%.o:	%.c
-		@mkdir -p $(dir $@)
-		@${CC} ${CFLAGS} -c $< -o $@ ${INC}
-		@printf "$(_FOREST_GREEN)🫖 brewing the tea... %-50s \r" $@
+.objs/%.o:    %.c
+	@mkdir -p $(dir $@)
+	@${CC} ${CFLAGS} -c $< -o $@ ${INC}
+	@printf "$(_FOREST_GREEN)🫖 brewing the tea... %-50s \r" $@
 
 ${OBJFLDR}:
-		@mkdir -p ${OBJFLDR}
-		@echo "$(_EMMERALD)libft: .obj/ folder created$(_END)"
+	@mkdir -p ${OBJFLDR}
+	@echo "$(_EMMERALD)libft: .obj/ folder created$(_END)"
 
 clean:
-		@${DEL} ${OBJFLDR}
-		@echo "$(_AQUAMARINE)libft: Binary files deleted$(_END)"
+	@${DEL} ${OBJFLDR}
+	@echo "$(_AQUAMARINE)libft: Object files & folders deleted$(_END)"
 
 fclean: clean
-		@${DEL} ${NAME}
-		@echo "$(_AQUAMARINE)libft: Object files & folders deleted$(_END)"
-		@echo "$(_AQUAMARINE)$(_BOLD)🧑‍🤝‍🧑 tweedle dum and tweedle dee leaving with libft 🧑‍🤝‍🧑$(_END)"
+	@${DEL} ${NAME}
+	@echo "$(_AQUAMARINE)libft: Binary files deleted$(_END)"
+	@echo "$(_AQUAMARINE)$(_BOLD)🧑‍🤝‍🧑 tweedle dum and tweedle dee leaving with libft 🧑‍🤝‍🧑$(_END)"
 
-re:		fclean all
+re:	fclean all
 
 gmk:
-		@if [ -d make ];then echo ok;else mkdir make;fi
-		@find -name '*.c' | sed 's/^/SOURCES += /' > make/sources.mk
-		@find -name '*.h' | sed 's/^/INCLUDES += /' > make/includes.mk
+	@if [ -d make ];then echo ok;else mkdir make;fi
+	@find -name '*.c' | sed 's/^/SOURCES += /' > make/sources.mk
+	@find -name '*.h' | sed 's/^/INCLUDES += /' > make/includes.mk
 
 .PHONY: all clean fclean re%

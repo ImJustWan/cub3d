@@ -37,13 +37,13 @@ typedef struct s_complex
 
 typedef struct s_img
 {
-	void			*img_ptr;
-	unsigned int	*buff;
-	int				bpp;
-	int				width;
-	int				height;
-	int				line_len;
-	int				endian;
+	void	*img_ptr;
+	char	*buff;
+	int		bpp;
+	int		width;
+	int		height;
+	int		line_len;
+	int		endian;
 }	t_img;
 
 typedef struct s_raycast
@@ -55,6 +55,24 @@ typedef struct s_raycast
 	float	half_cam_field;
 }	t_raycast;
 
+typedef struct s_player
+{
+	t_complex	pos;
+	t_complex	dir;
+}	t_player;
+
+typedef struct s_setup
+{
+	char		*no;
+	char		*so;
+	char		*ea;
+	char		*we;
+	int			*c;
+	int			*f;
+	t_complex	pos;
+	t_complex	dir;
+}	t_setup;
+
 typedef struct s_world // WOndeRlanD
 {
 	void		*mlx_ptr;
@@ -64,10 +82,9 @@ typedef struct s_world // WOndeRlanD
 	double		old_time;
 	t_img		*img;
 	t_img		*background;
-	t_hat		*hat;
-	t_complex	pos;
-	t_complex	player;
-	t_raycast	ray;
+	t_player	*player;
+	t_setup		*setup;
+	t_raycast	*ray;
 }	t_world;
 
 int	clean_init(t_world *world);
