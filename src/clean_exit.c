@@ -1,9 +1,41 @@
 #include "wonderland.h"
 
+void	clear_textures(t_world *world)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		if (world->texture[i].img_ptr)
+			mlx_destroy_image(world->mlx_ptr, world->texture[i].img_ptr);
+	}
+	free(world->setup->no);
+	free(world->setup->so);
+	free(world->setup->ea);
+	free(world->setup->we);
+}
+
+void	ft_free(char **split)
+{
+	int	i;
+
+	i = -1;
+	while (split[++i])
+	{
+		free(split[i]);
+		split[i] = NULL;
+	}
+	free(split);
+}
+
 int	clean_exit(t_world *world)
 {
 	if (!world)
 		exit (0);
+	clear_textures(world);
+	if (world->map)
+		ft_free(world->map);
 	if (world->ray)
 		free(world->ray);
 	if (world->setup)

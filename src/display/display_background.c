@@ -1,23 +1,7 @@
 #include "display.h"
 
-void	img_pix_put(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-	int		i;
 
-	i = img->bpp - 8;
-	pixel = img->buff + (y * img->line_len + x * (img->bpp / 8));
-	while (i >= 0)
-	{
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
-}
-
-void	image_to_window(t_world *world, int **buffer)
+void	background_to_window(t_world *world, int **buffer)
 {
 	int	y;
 	int	x;
@@ -60,5 +44,5 @@ void	display_background(t_world *world)
 			buffer[HEIGHT - y - 1][x] = world->setup->floor;
 		}
 	}
-	image_to_window(world, buffer);
+	background_to_window(world, buffer);
 }

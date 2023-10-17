@@ -8,7 +8,7 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	clean_init(&world);
-	start(&world);
+	loop(&world);
 	clean_exit(&world);
 	return (1);
 }

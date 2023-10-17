@@ -25,7 +25,14 @@
 # include "colors.h"
 
 # define WIDTH  800
-# define HEIGHT 800
+# define HEIGHT 825
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
+
+# define NORTH	1
+# define SOUTH	2
+# define EAST	3
+# define WEST	4
 
 typedef struct s_hat	t_hat;
 
@@ -38,7 +45,7 @@ typedef struct s_complex
 typedef struct s_img
 {
 	void	*img_ptr;
-	char	*buff;
+	char	*addr;
 	int		bpp;
 	int		width;
 	int		height;
@@ -46,19 +53,58 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_texture
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		width;
+	int		height;
+	int		line_len;
+	int		endian;
+}	t_texture;
+
+// yohai
+// mcombeau -> texture.c -> get_texture_index
+
+	// double		cam_x; // cameraX
+	// double		wall_x;
+	// double		wall_dist; // perpWallDist
+	// t_complex	cam_plane; // planeX
+	// t_complex	ray_dir; // rayDirX
+	// t_complex	cur_pos; // posX then mapX
+	// t_complex	side_dist; // sideDist
+	// t_complex	delta_dist; // deltaDist
+	// t_complex	step_dir; // stepX
+
 typedef struct s_raycast
 {
-	float	cos;
-	float	sin;
-	float	limit;
-	float	orientation;
-	float	half_cam_field;
+	int			draw_start;
+	int			draw_end;
+	int			cur_pos_x;
+	int			cur_pos_y;
+	int			wall_height;
+	int			index_texture;
+	double		step;
+	double		cam_x;
+	double		side;
+	double		wall_dist;
+	double		wall_pos;
+	double		ray_height;
+	double		ray_width;
+	t_complex	xpm;
+	t_complex	cam_plane;
+	t_complex	ray_dir;
+	t_complex	side_dist;
+	t_complex	delta_dist;
+	t_complex	step_dir;
 }	t_raycast;
 
 typedef struct s_player
 {
 	t_complex	pos;
 	t_complex	dir;
+	t_complex	cam_plane;
 }	t_player;
 
 typedef struct s_setup
@@ -84,6 +130,7 @@ typedef struct s_world // WOndeRlanD
 	double		old_time;
 	t_img		*img;
 	t_img		*background;
+	t_texture	texture[4];
 	t_player	*player;
 	t_setup		*setup;
 	t_raycast	*ray;
