@@ -67,10 +67,10 @@ typedef struct s_setup
 	char		*so;
 	char		*ea;
 	char		*we;
-	int			*c;
-	int			*f;
-	t_complex	pos;
-	t_complex	dir;
+	int			c;
+	int			f;
+	t_complex	pos; // fill with start pos
+	t_complex	dir; // fill with start dir (vector format)
 }	t_setup;
 
 typedef struct s_world // WOndeRlanD
@@ -83,7 +83,7 @@ typedef struct s_world // WOndeRlanD
 	t_img		*img;
 	t_img		*background;
 	t_player	*player;
-	t_setup		*setup;
+	t_setup		*setup; // fill with start pos
 	t_raycast	*ray;
 }	t_world;
 

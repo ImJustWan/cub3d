@@ -1,6 +1,7 @@
 SRCS += ./src/main.c
 SRCS += ./src/clean_init.c
 SRCS += ./src/parsing/parsing_map.c
+SRCS += ./src/parsing/parsing_map_checks.c
 SRCS += ./src/parsing/parsing_utils.c
 SRCS += ./src/parsing/parsing_read.c
 SRCS += ./src/parsing/parsing.c

@@ -2,11 +2,11 @@
 #include "error.h"
 #include "parsing.h"
 
-int file_name(char **argv)
+int	file_name(char **argv)
 {
 	if (ft_strstr(argv[1], ".cub\0"))
 		return (SUCCESS);
-	return(ft_error_msg(ERR, NULL, "Invalid file extention", USG), FAIL);
+	return (ft_error_msg(ERR, NULL, "Invalid file extention", USG), FAIL);
 }
 
 int	read_file(char **argv, t_list **read)
@@ -22,10 +22,10 @@ int	read_file(char **argv, t_list **read)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		new = ft_lstnew(line);
 		if (!new)
-			return(FAIL);
+			return (FAIL);
 		ft_lstadd_back(read, new);
 	}
 	close(fd);

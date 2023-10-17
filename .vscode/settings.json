@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "wonderland.h": "c",
-        "display.h": "c"
+        "display.h": "c",
+        "type_traits": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

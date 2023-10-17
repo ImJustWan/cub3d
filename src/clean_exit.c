@@ -22,6 +22,19 @@
 // 	hat = NULL;
 // }
 
+void	free_setup(t_setup *setup)
+{
+	if (setup->no)
+		free(setup->no);
+	if (setup->so)
+		free(setup->so);
+	if (setup->ea)
+		free(setup->ea);
+	if (setup->we)
+		free(setup->we);
+	free(setup);
+}
+
 int	clean_exit(t_world *world)
 {
 	if (!world)
@@ -31,7 +44,7 @@ int	clean_exit(t_world *world)
 	if (world->map)
 		ft_free(world->map);
 	if (world->setup)
-		free(world->setup);
+		free_setup(world->setup);
 	if (world->player)
 		free(world->player);
 	if (world->mlx_ptr)
