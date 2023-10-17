@@ -38,7 +38,7 @@ typedef struct s_complex
 typedef struct s_img
 {
 	void	*img_ptr;
-	int		*buff;
+	char	*buff;
 	int		bpp;
 	int		width;
 	int		height;
