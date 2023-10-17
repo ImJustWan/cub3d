@@ -41,5 +41,4 @@ void	start(t_world *world)
 	init_player(world, world->player);
 	init_setup(world);
 	loop(world);
-
 }

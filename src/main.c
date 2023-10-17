@@ -7,7 +7,6 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-
 	clean_init(&world);
 	start(&world);
 	clean_exit(&world);
