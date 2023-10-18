@@ -173,7 +173,6 @@ void	big_loop(t_world *world)
 	raycast_to_window(world);
 }
 
-
 int	display_raycast(t_world *world)
 {
 	move_player(world);
