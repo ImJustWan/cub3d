@@ -17,6 +17,10 @@ Parsed player info:\1\033[0m\2\n");
 		world->setup->pos.x, world->setup->pos.y);
 	printf("Player direction: x=[%f], y=[%f]\n",
 		world->setup->dir.x, world->setup->dir.y);
+	printf("\n\1\033[1m\2\1\033[38;5;127m\2\
+Parsed colors:\1\033[0m\2\n");
+	printf("Ceiling color: [%d]\n", world->setup->c);
+	printf("Floor color: [%d]\n", world->setup->f);
 }
 
 int	parsing(t_world *world, char **argv)
@@ -32,9 +36,8 @@ int	parsing(t_world *world, char **argv)
 	}
 	if (parsing_map(world, read))
 		return (ft_clear(read), FAIL);
-	// if (parsing_description(world, read))
-	// 	return (/*ft_clear(read),*/ FAIL);
+	if (parsing_description(world, read))
+		return (FAIL);
 	print_info(world);
-	ft_clear(read);
 	return (SUCCESS);
 }

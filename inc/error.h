@@ -5,12 +5,35 @@
 
 # define ERR "\1\033[1m\2\1\033[38;5;127m\2Error\n\1\033[0m\2"
 
-# define ARG "Incorrect number of arguments"
-# define USG "\1\033[38;5;118m\2\
-Usage: ./cub3d [scene_description_file.cub]\
-\1\033[0m\2"
+// general error message
+# define MAL "Malloc error"
+# define PAR "Parsing"
 
-# define CUB "Incorect file extension."
+// File related error 
+# define OPN "Opening file"
+# define ARG "Incorrect number of arguments"
+# define USG "Usage: ./cub3d [scene_description_file.cub]"
+# define CUB "\1\033[1m\2Incorect file extension\1\033[0m\2"
+
+// description file content error
+# define IDF "\1\033[1m\2Invalid scene description file\1\033[0m\2"
+# define EMP "Empty File"
+# define UKN "Unknown identifyier"
+
+	// Map errors
+# define IMP "\1\033[1m\2Invalid map\1\033[0m\2"
+# define NPL "No player on the map"
+# define MPL "Too many players on the map"
+# define WAL "The map is not enclosed by walls"
+
+	// Textures & colors errors
+# define IFL "\1\033[1m\2Invalid file\1\033[0m\2"
+# define DUP "Duplicate file identifyier"
+# define COL "Invalid colors"
+# define MSC "Missing color(s)"
+# define IID "Invalid identifyier"
+# define MFP "Missing identifyier or file path"
+# define MIF "To many information"
 
 void	ft_error_msg(char *err, int *ptr, char *arg, char *str);
 

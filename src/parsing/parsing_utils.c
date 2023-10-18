@@ -42,3 +42,10 @@ int	ft_table_size(char **table)
 		i++;
 	return (i);
 }
+
+void	free_split(char **split)
+{
+	if (split && split[0])
+		free(split[0]);
+	free(split);
+}

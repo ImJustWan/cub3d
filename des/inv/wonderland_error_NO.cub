@@ -1,6 +1,6 @@
-NO ./xpm/wonderland_wall_north
+NO 
 SO ./xpm/wonderland_wall_south
-
+WE ./xpm/wonderland_wall_west
 EA ./xpm/wonderland_wall_east
 
 F 179,144,96

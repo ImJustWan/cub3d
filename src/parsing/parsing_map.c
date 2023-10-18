@@ -57,7 +57,7 @@ char	**build_map(t_world *world, t_list *map_lst)
 	map = map_fill(map, map_lst, size);
 	if (!map)
 		return (NULL);
-	if (map_verif(world, map) == FAIL)
+	if (map_verif(world, map, -1, 0) == FAIL)
 		return (ft_free(map), NULL);
 	return (map);
 }
@@ -72,6 +72,6 @@ int	parsing_map(t_world *world, t_list *read)
 	if (!world->map)
 		return (ft_clear(map_lst), FAIL);
 	if (world->setup->pos.x == 0 || world->setup->pos.y == 0)
-		return(ft_clear(map_lst), FAIL) //No player on map !
+		return(ft_clear(map_lst), ft_error_msg(ERR, NULL, IMP, NPL), FAIL); //No player on map !
 	return (ft_clear(map_lst), SUCCESS);
 }

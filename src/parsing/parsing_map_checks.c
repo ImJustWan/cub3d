@@ -33,12 +33,25 @@ int	player_info(t_world *world, char **map, int i, int j)
 	return (SUCCESS);
 }
 
-int	map_verif(t_world *world, char **map)
+int	comb_map(char **map, int i, int j)
 {
-	int	i;
-	int	j;
+	while(map[++i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr("10NSWE ", map[i][j]) == NULL)
+				return (ft_error_msg(ERR, NULL, IMP, UKN), FAIL);
+			j++;
+		}
+	}
+	return(SUCCESS);
+}
 
-	i = -1;
+int	map_verif(t_world *world, char **map, int i, int j)
+{
+	if (comb_map(map, i, j))
+		return (FAIL);
 	while (map[++i])
 	{
 		j = 0;
@@ -46,17 +59,17 @@ int	map_verif(t_world *world, char **map)
 		{
 			if (map[i][j] == '1' || map[i][j] == ' ' )
 				j++;
-			else if (ft_strchr("0NSWE", map[i][j]))
+			else if (ft_strchr("0NSWE", map[i][j]) != NULL)
 			{
 				if (map[i][j] != '0' && player_info(world, map, i, j)) 
-					return (FAIL); // Too many players on map;
+					return (ft_error_msg(ERR, NULL, IMP, MPL), FAIL);
 				if (!check_surroundings(map, i, j))
 					j++;
 				else
-					return (FAIL); // The map is not enclosed in walls
+					return (ft_error_msg(ERR, NULL, IMP, WAL), FAIL);
 			}
 			else
-				return(FAIL); // Unkmown identifyer in map
+				return(FAIL);
 		}
 	}
 	return (SUCCESS);

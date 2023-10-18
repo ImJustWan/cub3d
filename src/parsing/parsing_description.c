@@ -1,57 +1,65 @@
 #include "parsing.h"
 
-char	*skip_blank_space(char *str)
+int	dispatch_info(t_world *world, char **split)
 {
-	if (!str)
-		return (NULL);
-	while (*str)
+	int	split_size = ft_table_size(split);
+	if (split_size < 2)
+		return (ft_error_msg(ERR, NULL, IFL, MFP), FAIL);
+	if (split_size > 2)
+		return (ft_error_msg(ERR, NULL, IFL, MIF), FAIL);
+	if (ft_strlen(split[0]) == 2)
 	{
-		if ((*str >= 7 && *str <= 13) || *str == 32)
-			str++;
-		else
-			break ;
+		// if (file_save(world, split))
+		// 	return(FAIL);
+		return (free_split(split), SUCCESS);
 	}
-	return (str);
+	else if (ft_strlen(split[0]) == 1)
+	{
+		if (color_save(world, split))
+			return (FAIL);
+		ft_free(split);
+	}
+	else
+		return (ft_error_msg(ERR, NULL, IFL, IID), FAIL);
+	return (SUCCESS);
 }
-void	save_it(t_world *world, char **split)
+
+int	save_info(t_world *world, char *str)
 {
-	if (split[0][0] == 'C' || split[0][0] == 'F')
-		return (save_color(world, split));
-	if (split[1] && split[1][ft_strlen(split[1]) - 1] == '\n')
-		split[1][ft_strlen(split[1]) - 1] = '\0';
-	if (!(strstr(split[1], ".xpm\0")))
-		return (FAIL); // Wrong file format
-	if (!strcmp("NO", split[0]) && !world->setup->no)
-		world->setup->no = split[1];
-	else if (!strcmp("SO", split[0]) && !world->setup->so)
-		world->setup->so = split[1];
-	else if (!strcmp("EA", split[0]) && !world->setup->ea)
-		world->setup->ea = split[1];
-	else if (!strcmp("WE", split[0]) && !world->setup->we)
-		world->setup->we = split[1];
-	
+	char **split;
+
+	split = ft_split(str, 32);
+	if (!split)
+		return (ft_error_msg(ERR, NULL, PAR, MAL), FAIL);
+	if (dispatch_info(world, split))
+		return(ft_free(split), FAIL);
+	return (SUCCESS);
 }
 
 int		parsing_description(t_world *world, t_list *read)
 {
-	char	**split;
+	t_list	*cpy;
 
-	while(read)
+	(void)world;
+	read = remove_empty_lines(read);
+	remove_newline(read);
+	cpy = read;
+	while(cpy)
 	{
-		
-		split = ft_split((char *)read->content, ' ');
-		if (!split)
-			return(FAIL);//malloc failled
-		if (split && is_empy(split[0]))
-
-		if (strcmp("NO", split[0]) || strcmp("SO", split[0]) 
-			|| strcmp("EA", split[0]) || strcmp("WE", split[0])
-			|| strcmp("C", split[0]) || strcmp("F", split[0]))
-			return (ft_free(split), FAIL) // wrong identifier
-		else if
-			save_it(world, split);
-		free(split[0]);
-		free(split);
-		read = read->next
+		printf("After [%s]\n", (char *)cpy->content);
+		cpy = cpy->next;
 	}
+	cpy = read;
+	while(cpy)
+	{
+		if (save_info(world, (char *)cpy->content))
+			return(ft_clear(read), FAIL);
+		cpy = cpy->next;
+	}
+	ft_clear(read);
+	// if (check_textures(world)));
+	// 	return (FAIL);
+	return(SUCCESS);
 }
+
+	// t_list *cpy;

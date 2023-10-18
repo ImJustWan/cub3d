@@ -1,6 +1,6 @@
 NO ./xpm/wonderland_wall_north
 SO ./xpm/wonderland_wall_south
-
+WE ./xpm/wonderland_wall_west
 EA ./xpm/wonderland_wall_east
 
 F 179,144,96
@@ -10,6 +10,6 @@ C 159,228,245
 1011111
 1001001
 1010011
-1000N01
+1000G01
 1110001
   11111
