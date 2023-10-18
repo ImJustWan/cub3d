@@ -4,9 +4,11 @@
 int	init_player(t_world *world, t_player *player)
 {
 	player->pos.x = world->setup->pos.x;
-	player->dir.x = world->setup->dir.x;
 	player->pos.y = world->setup->pos.y;
+	player->dir.x = world->setup->dir.x;
 	player->dir.y = world->setup->dir.y;
+	player->move.x = 0;
+	player->move.y = 0;
 	return (0);
 }
 
@@ -16,8 +18,8 @@ int	init_raycast(t_world *world, t_raycast *ray)
 	ray->draw_end = 0;
 	ray->cam_x = 0;
 	ray->side = 0;
-	ray->wall_pos = 0; // perp_wall_dist
-	ray->wall_dist = 0; // perp_wall_dist
+	ray->wall_pos = 0;
+	ray->wall_dist = 0;
 	ray->cam_plane.x = 0;
 	ray->cam_plane.y = 0;
 	ray->ray_dir.x = 0;
@@ -40,9 +42,22 @@ int	init_raycast(t_world *world, t_raycast *ray)
 
 int	init_setup(t_world *world, t_setup *setup)
 {
+	int	i;
+	int	j;
+
 	(void)world;
 	setup->ceiling = ft_encode_rgb(102, 0, 102);
 	setup->floor = ft_encode_rgb(255, 153, 51);
+	if (world->from_scratch == 1)
+	{
+		i = -1;
+		while (++i < HEIGHT)
+		{
+			j = -1;
+			while (++j < WIDTH)
+				world->buffer[i][j] = 0;
+		}
+	}
 	return (0);
 }
 
@@ -57,60 +72,37 @@ int	init_mlx(t_world *world)
 	world->img->img_ptr = mlx_new_image(world->mlx_ptr, WIDTH, HEIGHT);
 	if (!world->img->img_ptr)
 		return (1);
-	world->img->addr = mlx_get_data_addr(world->img->img_ptr, \
+	world->img->addr = (int *)mlx_get_data_addr(world->img->img_ptr, \
 		&(world->img->bpp), &(world->img->line_len), &(world->img->endian));
 	if (!world->img->addr)
 		return (1);
 	return (0);
 }
 
-
-void	*ft_ze_calloc(size_t nmemb, size_t size)
-{
-	unsigned char	*array;
-	unsigned int	i;
-
-	if (size != 0 && nmemb > SIZE_MAX / size)
-		return (NULL);
-	array = (unsigned char *)malloc(nmemb * size);
-	if (!array)
-		return (NULL);
-	i = 0;
-	while (i < nmemb * size)
-	{
-		array[i] = '\0';
-		i++;
-	}
-	return ((void *)array);
-}
-
 void	fake_init(t_world *world)
 {
 	int	i;
 
-	world->map = ft_ze_calloc(6, sizeof(char *));
-	i = -1;
-	while (++i < 5)
-		world->map[i] = ft_ze_calloc(6, sizeof(char));
+	world->map = ft_calloc(6, sizeof(char **));
 	i = -1;
 	while (++i < 5)
 	{
 		if (i == 0)
-			world->map[i] = "11111";
+			world->map[i] = ft_strdup("11111");
 		else if (i == 2)
-			world->map[i] = "10N01";
+			world->map[i] = ft_strdup("10N01");
 		else if (i == 4)
-			world->map[i] = "11111";
+			world->map[i] = ft_strdup("11111");
 		else
-			world->map[i] = "10001";
+			world->map[i] = ft_strdup("10001");
 	}
-	// NORTH
-	world->player->pos.x = 2.5;
-	world->player->pos.y = 2.5;
-	world->player->dir.x = 0;
-	world->player->dir.y = -1;
-	world->player->cam_plane.x = 0.66;
-	world->player->cam_plane.y = 0;
+	world->player->pos.x = 1.5;
+	world->player->pos.y = 1.5;
+	world->player->dir.x = -1;
+	world->player->dir.y = 0;
+	world->player->cam_plane.x = 0;
+	world->player->cam_plane.y = 0.66;
+	world->from_scratch = 0;
 }
 
 void	display_init(t_world *world)

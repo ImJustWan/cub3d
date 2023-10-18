@@ -5,6 +5,15 @@ int	ft_encode_rgb(int red, int green, int blue)
 	return (red << 16 | green << 8 | blue);
 }
 
+int	get_color(t_world *world, int x, int y, int i)
+{
+	(void)world;
+	(void)x;
+	(void)y;
+	(void)i;
+	return (0);
+}
+
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
@@ -13,7 +22,7 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	if (y < 0 || y > HEIGHT - 1 || x < 0 || x > WIDTH - 1)
 		return ;
 	i = img->bpp - 8;
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	pixel = 0;
 	while (i >= 0)
 	{
 		if (img->endian != 0)
@@ -23,3 +32,5 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 		i -= 8;
 	}
 }
+
+	// pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));

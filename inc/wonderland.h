@@ -24,15 +24,18 @@
 # include "libft.h"
 # include "colors.h"
 
-# define WIDTH  800
-# define HEIGHT 825
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 64
+# define WIDTH  640
+# define HEIGHT 480
+# define TEXTURE_WIDTH 100
+# define TEXTURE_HEIGHT 100
 
-# define NORTH	1
-# define SOUTH	2
-# define EAST	3
-# define WEST	4
+# define NORTH 0
+# define SOUTH 1
+# define EAST 2	
+# define WEST 3
+
+# define MOVE_SPEED 0.0125
+# define ROT_SPEED 0.015
 
 typedef struct s_hat	t_hat;
 
@@ -45,7 +48,7 @@ typedef struct s_complex
 typedef struct s_img
 {
 	void	*img_ptr;
-	char	*addr;
+	int		*addr;
 	int		bpp;
 	int		width;
 	int		height;
@@ -85,13 +88,14 @@ typedef struct s_raycast
 	int			cur_pos_y;
 	int			wall_height;
 	int			index_texture;
+	int			x_on_tex;
+	int			y_on_tex;
 	double		step;
 	double		cam_x;
 	double		side;
 	double		wall_dist;
 	double		wall_pos;
 	double		ray_height;
-	double		ray_width;
 	t_complex	xpm;
 	t_complex	cam_plane;
 	t_complex	ray_dir;
@@ -105,6 +109,7 @@ typedef struct s_player
 	t_complex	pos;
 	t_complex	dir;
 	t_complex	cam_plane;
+	t_complex	move;
 }	t_player;
 
 typedef struct s_setup
@@ -128,9 +133,11 @@ typedef struct s_world // WOndeRlanD
 	char		**map;
 	double		time;
 	double		old_time;
+	int			from_scratch;
+	int			buffer[HEIGHT][WIDTH];
+	int			**texture;
 	t_img		*img;
 	t_img		*background;
-	t_texture	texture[4];
 	t_player	*player;
 	t_setup		*setup;
 	t_raycast	*ray;

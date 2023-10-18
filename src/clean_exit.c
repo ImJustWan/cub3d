@@ -6,10 +6,8 @@ void	clear_textures(t_world *world)
 
 	i = -1;
 	while (++i < 4)
-	{
-		if (world->texture[i].img_ptr)
-			mlx_destroy_image(world->mlx_ptr, world->texture[i].img_ptr);
-	}
+		free((*world).texture[i]);
+	free(world->texture);
 	free(world->setup->no);
 	free(world->setup->so);
 	free(world->setup->ea);

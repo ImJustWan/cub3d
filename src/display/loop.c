@@ -1,18 +1,31 @@
 #include "display.h"
+#include "hooks.h"
 
 int	loop(t_world *world)
 {
 	display_init(world);
 	mlx_hook(world->win, DESTROY, 0, clean_exit, world);
-	// display_background(world);
-	display_raycast(world, world->ray);
-	// mlx_put_image_to_window(world, world->win, world->img->img_ptr, 0, 0);
+	mlx_hook(world->win, KeyPress, KeyPressMask, keys_press, world);
+	mlx_hook(world->win, KeyRelease, KeyReleaseMask, keys_release, world);
+	display_raycast(world);
+	mlx_loop_hook(world->mlx_ptr, display_raycast, world);
 	mlx_loop(world->mlx_ptr);
 	return (0);
 }
 /*
 
+	// display_background(world);
+	// mlx_put_image_to_window(world, world->win, world->img->img_ptr, 0, 0);
+
 funnsies
+
+	world->texture[i].img_ptr = mlx_xpm_file_to_image(world->mlx_ptr, \
+		"x_north.xpm", &(texture[i].width), &(texture[i].height));
+	if (!world->texture[i].img_ptr)
+		return (1);
+	world->texture[i].addr = mlx_get_data_addr(texture[i].img_ptr, \
+		&(texture[i].bpp), &(texture[i].line_len), &(texture[i].endian));
+	if (!world->texture[i].addr)
 
 	mlx_put_image_to_window(world->mlx_ptr, world->win, \
 		world->texture[0].img_ptr, (WIDTH / 2) - (world->texture[0].width / 2), 100);

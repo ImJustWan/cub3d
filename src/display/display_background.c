@@ -1,6 +1,5 @@
 #include "display.h"
 
-
 void	background_to_window(t_world *world, int **buffer)
 {
 	int	y;
@@ -9,6 +8,7 @@ void	background_to_window(t_world *world, int **buffer)
 	y = -1;
 	while (++y < HEIGHT)
 	{
+		y++;
 		x = -1;
 		while (++x < WIDTH)
 			img_pix_put(world->img, x, y, buffer[y][x]);
