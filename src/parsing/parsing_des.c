@@ -9,8 +9,8 @@ int	dispatch_info(t_world *world, char **split)
 		return (ft_error_msg(ERR, NULL, IFL, MIF), FAIL);
 	if (ft_strlen(split[0]) == 2)
 	{
-		// if (file_save(world, split))
-		// 	return(FAIL);
+		if (texture_save(world, split))
+			return(FAIL);
 		return (free_split(split), SUCCESS);
 	}
 	else if (ft_strlen(split[0]) == 1)
@@ -46,12 +46,6 @@ int		parsing_description(t_world *world, t_list *read)
 	cpy = read;
 	while(cpy)
 	{
-		printf("After [%s]\n", (char *)cpy->content);
-		cpy = cpy->next;
-	}
-	cpy = read;
-	while(cpy)
-	{
 		if (save_info(world, (char *)cpy->content))
 			return(ft_clear(read), FAIL);
 		cpy = cpy->next;
@@ -63,3 +57,9 @@ int		parsing_description(t_world *world, t_list *read)
 }
 
 	// t_list *cpy;
+	// cpy = read;
+	// while(cpy)
+	// {
+	// 	printf("After [%s]\n", (char *)cpy->content);
+	// 	cpy = cpy->next;
+	// }

@@ -32,6 +32,8 @@ int	map_verif(t_world *world, char **map, int i, int j);
 // parsing_description.c
 int		parsing_description(t_world *world, t_list *read);
 
+// parsing_des_textures.c
+int	texture_save(t_world *world, char **split);
 
 // parsing_description_clean.c
 t_list	*remove_empty_lines(t_list *read);
