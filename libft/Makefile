@@ -46,11 +46,11 @@ ${OBJFLDR}:
 
 clean:
 		@${DEL} ${OBJFLDR}
-		@echo "$(_AQUAMARINE)libft: Binary files deleted$(_END)"
+		@echo "$(_AQUAMARINE)libft: Object files & folders deleted$(_END)"
 
 fclean: clean
 		@${DEL} ${NAME}
-		@echo "$(_AQUAMARINE)libft: Object files & folders deleted$(_END)"
+		@echo "$(_AQUAMARINE)libft: Binary files deleted$(_END)"
 		@echo "$(_AQUAMARINE)$(_BOLD)🧑‍🤝‍🧑 tweedle dum and tweedle dee leaving with libft 🧑‍🤝‍🧑$(_END)"
 
 re:		fclean all
