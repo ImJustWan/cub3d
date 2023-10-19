@@ -65,7 +65,9 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 			ray->cur_pos_y += ray->step_dir.y;
 			ray->side = 1;
 		}
-		if (map[ray->cur_pos_x][ray->cur_pos_y] == '1')
+		if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
+			|| ray->cur_pos_x > (int)ft_strlen(map[ray->cur_pos_x])\
+			|| (map[ray->cur_pos_x][ray->cur_pos_y] == '1'))
 			wall = 1;
 	}
 	if (ray->side == 0)
@@ -175,7 +177,8 @@ void	big_loop(t_world *world)
 
 int	display_raycast(t_world *world)
 {
-	move_player(world);
+	move_player(world, world->player);
+	rotate_player(world, world->player);
 	big_loop(world);
 	return (0);
 }

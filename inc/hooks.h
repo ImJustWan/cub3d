@@ -15,6 +15,11 @@ int	    keys_press(int button, t_world *world);
 int	    keys_release(int button, t_world *world);
 int	    handle_mouse(int button, int x, int y, t_world *world);
 
-void	move_player(t_world *world);
+void	move_player(t_world *world, t_player *player);
+void	front_back(t_world *world, t_move move);
+void	left_right(t_world *world, t_move move);
+
+
+void	rotate_player(t_world *world, t_player *player);
 
 #endif

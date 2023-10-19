@@ -7,6 +7,7 @@ int	init_player(t_world *world, t_player *player)
 	player->pos.y = world->setup->pos.y;
 	player->dir.x = world->setup->dir.x;
 	player->dir.y = world->setup->dir.y;
+	world->player->rotate = 0;
 	player->move.x = 0;
 	player->move.y = 0;
 	return (0);
@@ -48,6 +49,7 @@ int	init_setup(t_world *world, t_setup *setup)
 	(void)world;
 	setup->ceiling = ft_encode_rgb(102, 0, 102);
 	setup->floor = ft_encode_rgb(255, 153, 51);
+	setup->orientation = -1;
 	if (world->from_scratch == 1)
 	{
 		i = -1;
@@ -98,11 +100,36 @@ void	fake_init(t_world *world)
 	}
 	world->player->pos.x = 1.5;
 	world->player->pos.y = 1.5;
-	world->player->dir.x = -1;
-	world->player->dir.y = 0;
-	world->player->cam_plane.x = 0;
-	world->player->cam_plane.y = 0.66;
 	world->from_scratch = 0;
+	world->setup->orientation = NORTH;
+	if (world->setup->orientation == NORTH)
+	{
+		world->player->dir.x = 0;
+		world->player->dir.y = -1;
+		world->player->cam_plane.x = 0.66;
+		world->player->cam_plane.y = 0.00;
+	}
+	if (world->setup->orientation == SOUTH)
+	{
+		world->player->dir.x = 1;
+		world->player->dir.y = 0;
+		world->player->cam_plane.x = 0.00;
+		world->player->cam_plane.y = 0.66;
+	}
+	if (world->setup->orientation == EAST)
+	{
+		world->player->dir.x = -1;
+		world->player->dir.y = 0;
+		world->player->cam_plane.x = 0.00;
+		world->player->cam_plane.y = -0.66;
+	}
+	if (world->setup->orientation == WEST)
+	{
+		world->player->dir.x = 0;
+		world->player->dir.y = 0;
+		world->player->cam_plane.x = 0;
+		world->player->cam_plane.y = 0.66;
+	}
 }
 
 void	display_init(t_world *world)

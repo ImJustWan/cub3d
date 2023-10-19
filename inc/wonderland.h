@@ -106,6 +106,7 @@ typedef struct s_raycast
 
 typedef struct s_player
 {
+	int			rotate;
 	t_complex	pos;
 	t_complex	dir;
 	t_complex	cam_plane;
@@ -122,6 +123,7 @@ typedef struct s_setup
 	int			*f;
 	int			ceiling;
 	int			floor;
+	int			orientation;
 	t_complex	pos;
 	t_complex	dir;
 }	t_setup;

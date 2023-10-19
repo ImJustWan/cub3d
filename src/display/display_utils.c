@@ -5,15 +5,6 @@ int	ft_encode_rgb(int red, int green, int blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-int	get_color(t_world *world, int x, int y, int i)
-{
-	(void)world;
-	(void)x;
-	(void)y;
-	(void)i;
-	return (0);
-}
-
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;

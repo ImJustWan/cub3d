@@ -8,4 +8,6 @@ SRCS += ./src/display/display_raycast.c
 SRCS += ./src/display/display_background.c
 SRCS += ./src/hooks/mouse_hooks.c
 SRCS += ./src/hooks/keys_hooks.c
+SRCS += ./src/hooks/move.c
+SRCS += ./src/hooks/rotate.c
 SRCS += ./src/clean_exit.c
