@@ -24,10 +24,18 @@
 # include "libft.h"
 # include "colors.h"
 
-# define WIDTH  800
-# define HEIGHT 800
+# define WIDTH  640
+# define HEIGHT 480
+# define TEXTURE_WIDTH 100
+# define TEXTURE_HEIGHT 100
 
-// typedef struct s_hat t_hat;
+# define NORTH 0
+# define SOUTH 1
+# define EAST 2	
+# define WEST 3
+
+# define MOVE_SPEED 0.0125
+# define ROT_SPEED 0.015
 
 typedef struct s_complex
 {
@@ -37,38 +45,35 @@ typedef struct s_complex
 
 typedef struct s_player
 {
+	int			rotate;
 	t_complex	pos;
 	t_complex	dir;
+	t_complex	cam_plane;
+	t_complex	move;
 }	t_player;
 
 typedef struct s_img
 {
 	void	*img_ptr;
-	char	*buff;
+	int		*addr;
 	int		bpp;
 	int		width;
 	int		height;
 	int		line_len;
 	int		endian;
-}    t_img;
+}	t_img;
 
-typedef struct s_raycast
-{
-	float	cos;
-	float	sin;
-	float	limit;
-	float	orientation;
-	float	half_cam_field;
-}	t_raycast;
+
 
 typedef struct s_setup
-	{
+{
 	char		*no;
 	char		*so;
 	char		*ea;
 	char		*we;
 	int			c;
 	int			f;
+	int			orientation;
 	t_complex	pos; // fill with start pos
 	t_complex	dir; // fill with start dir (vector format)
 }	t_setup;
@@ -80,18 +85,21 @@ typedef struct s_world // WOndeRlanD
 	char		**map;
 	double		time;
 	double		old_time;
+	int			from_scratch;
+	int			buffer[HEIGHT][WIDTH];
+	int			**texture;
 	t_img		*img;
 	t_img		*background;
 	t_player	*player;
-	t_setup		*setup; // fill with start pos
+	t_setup		*setup;
 	t_raycast	*ray;
 }	t_world;
 
-int	clean_init(t_world *world);
-int	clean_exit(t_world *world);
+int		clean_init(t_world *world);
+int		clean_exit(t_world *world);
 
 // utils.c
-void ft_free(char **split);
-void    ft_clear(t_list *save);
+void	t_free(char **split);
+void	ft_clear(t_list *save);
 
 #endif
