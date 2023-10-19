@@ -2,7 +2,13 @@
     "files.associations": {
         "wonderland.h": "c",
         "display.h": "c",
+<<<<<<< HEAD
         "type_traits": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
+=======
+        "cmath": "c",
+        "hooks.h": "c"
+    }
+>>>>>>> display
 }

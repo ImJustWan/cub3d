@@ -46,6 +46,7 @@ int	clean_init(t_world *world)
 	world->mlx_ptr = NULL;
 	world->win = NULL;
 	world->time = 0;
+	world->from_scratch = 0;
 	world->old_time = 0;
 	world->map = NULL;
 	world->setup->c = -1;
@@ -54,3 +55,8 @@ int	clean_init(t_world *world)
 	world->setup->pos.y = 0;
 	return (0);
 }
+
+/*
+world->ray.orientation
+depends on N(0)/ S(90)/ E(180)/ W(270);
+*/

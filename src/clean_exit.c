@@ -35,7 +35,13 @@ int	clean_exit(t_world *world)
 		mlx_loop_end(world->mlx_ptr);
 		mlx_destroy_display(world->mlx_ptr);
 		free(world->mlx_ptr);
+			mlx_destroy_window(world->mlx_ptr, world->win);
+		mlx_loop_end(world->mlx_ptr);
+		mlx_destroy_display(world->mlx_ptr);
+		free(world->mlx_ptr);
 	}
+	if (world->img)
+		free(world->img);
 	if (world->img)
 		free(world->img);
 	exit (0);

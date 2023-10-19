@@ -14,5 +14,7 @@ SRCS += ./src/error/error.c
 SRCS += ./src/hooks/hook_loop.c
 SRCS += ./src/hooks/mouse_hooks.c
 SRCS += ./src/hooks/keys_hooks.c
+SRCS += ./src/hooks/move.c
+SRCS += ./src/hooks/rotate.c
 SRCS += ./src/clean_exit.c
 SRCS += ./src/utils.c
