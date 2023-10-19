@@ -16,6 +16,34 @@ int	check_surroundings(char **map, int i, int j)
 	return (SUCCESS);
 }
 
+void	set_player_dir(t_world *world)
+{
+	if (world->setup->orientation == NORTH)
+	{
+		world->setup->dir.y = 1;
+		world->player->cam_plane.x = 0.66;
+		world->player->cam_plane.y = 0.00;
+	}
+	if (world->setup->orientation == SOUTH)
+	{
+		world->setup->dir.y = -1;
+		world->player->cam_plane.x = 0.00;
+		world->player->cam_plane.y = 0.66;
+	}
+	if (world->setup->orientation == EAST)
+	{
+		world->setup->dir.x = 1;
+		world->player->cam_plane.x = 0.00;
+		world->player->cam_plane.y = -0.66;
+	}
+	if (world->setup->orientation == WEST)
+	{
+		world->setup->dir.x = -1;
+		world->player->cam_plane.x = 0;
+		world->player->cam_plane.y = 0.66;
+	}
+}
+
 int	player_info(t_world *world, char **map, int i, int j)
 {
 	if (world->setup->pos.x != 0 || world->setup->pos.y != 0)
@@ -23,13 +51,14 @@ int	player_info(t_world *world, char **map, int i, int j)
 	world->setup->pos.x = i;
 	world->setup->pos.y = j;
 	if (map[i][j] == 'N')
-		world->setup->dir.y = 1;
+		world->setup->orientation = NORTH;
 	else if (map[i][j] == 'S')
-		world->setup->dir.y = -1;
+		world->setup->orientation = SOUTH;
 	else if (map[i][j] == 'E')
-		world->setup->dir.x = 1;
+		world->setup->orientation = EAST;
 	else if (map[i][j] == 'W')
-		world->setup->dir.x = -1;
+		world->setup->orientation = WEST;
+	set_player_dir(world);
 	return (SUCCESS);
 }
 

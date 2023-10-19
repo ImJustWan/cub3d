@@ -19,7 +19,6 @@ void	move_player(t_world *world, t_player *player);
 void	front_back(t_world *world, t_move move);
 void	left_right(t_world *world, t_move move);
 
-
 void	rotate_player(t_world *world, t_player *player);
 
 #endif

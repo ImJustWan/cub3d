@@ -56,11 +56,7 @@ typedef struct s_img
 {
 	void	*img_ptr;
 	int		*addr;
-	void	*img_ptr;
-	int		*addr;
 	int		bpp;
-	int		width;
-	int		height;
 	int		width;
 	int		height;
 	int		line_len;
@@ -107,20 +103,10 @@ typedef struct s_setup
 typedef struct s_world // WOndeRlanD
 {
 	void		*mlx_ptr;
-	void		*mlx_ptr;
 	void		*win;
-	char		**map;
 	char		**map;
 	double		time;
 	double		old_time;
-	int			from_scratch;
-	int			buffer[HEIGHT][WIDTH];
-	int			**texture;
-	t_img		*img;
-	t_img		*background;
-	t_player	*player;
-	t_setup		*setup;
-	t_raycast	*ray;
 	int			from_scratch;
 	int			buffer[HEIGHT][WIDTH];
 	int			**texture;

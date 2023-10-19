@@ -40,8 +40,8 @@ void	display_background(t_world *world)
 		x = -1;
 		while (++x < WIDTH)
 		{
-			buffer[y][x] = world->setup->ceiling;
-			buffer[HEIGHT - y - 1][x] = world->setup->floor;
+			buffer[y][x] = world->setup->c;
+			buffer[HEIGHT - y - 1][x] = world->setup->f;
 		}
 	}
 	background_to_window(world, buffer);

@@ -66,7 +66,7 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 			ray->side = 1;
 		}
 		if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
-			|| ray->cur_pos_x > (int)ft_strlen(map[ray->cur_pos_x])\
+			|| ray->cur_pos_x > (int)ft_strlen(map[ray->cur_pos_x]) \
 			|| (map[ray->cur_pos_x][ray->cur_pos_y] == '1'))
 			wall = 1;
 	}
@@ -126,7 +126,7 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 		(ray->draw_start - HEIGHT / 2 + ray->wall_height / 2);
 	y = -1;
 	while (++y < ray->draw_start)
-		world->buffer[y][x] = world->setup->ceiling;
+		world->buffer[y][x] = world->setup->c;
 	while (y < ray->draw_end)
 	{
 		ray->y_on_tex = (int)ray->ray_height & (TEXTURE_HEIGHT - 1);
@@ -138,7 +138,7 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 		y++;
 	}
 	while (++y < HEIGHT)
-		world->buffer[y][x] = world->setup->floor;
+		world->buffer[y][x] = world->setup->f;
 }
 
 // ray_height (ex depth) = tex_pos 

@@ -19,6 +19,9 @@ int	clean_init_struct(t_world *world)
 
 int	clean_init_textures(t_world *world)
 {
+	int i;
+	int j;
+
 	(*world).texture = (int **)malloc(sizeof(int *) * 4);
 	i = -1;
 	while (++i < 4)
