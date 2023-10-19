@@ -1,27 +1,6 @@
 #include "wonderland.h"
 #include "parsing.h"
 
-// void	ft_empty_hat(t_hat *hat)
-// {
-// 	t_hat *next;
-
-// 	while (hat)
-// 	{
-// 		if (hat->index)
-// 			free(hat->index);
-// 		if (hat->path)
-// 			free(hat->path);
-// 		if (hat->rgb)
-// 			free(hat->rgb);
-// 		next = hat->next;
-// 		free(hat);
-// 		hat = next;
-// 	}
-// 	if (hat)
-// 		free(hat);
-// 	hat = NULL;
-// }
-
 void	free_setup(t_setup *setup)
 {
 	if (setup->no)
