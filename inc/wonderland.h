@@ -24,7 +24,6 @@
 # include "libft.h"
 # include "colors.h"
 
-
 # define WIDTH  640
 # define HEIGHT 480
 # define TEXTURE_WIDTH 100
@@ -64,7 +63,29 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-
+typedef struct s_raycast
+{
+	int			draw_start;
+	int			draw_end;
+	int			cur_pos_x;
+	int			cur_pos_y;
+	int			wall_height;
+	int			index_texture;
+	int			x_on_tex;
+	int			y_on_tex;
+	double		step;
+	double		cam_x;
+	double		side;
+	double		wall_dist;
+	double		wall_pos;
+	double		ray_height;
+	t_complex	xpm;
+	t_complex	cam_plane;
+	t_complex	ray_dir;
+	t_complex	side_dist;
+	t_complex	delta_dist;
+	t_complex	step_dir;
+}	t_raycast;
 
 typedef struct s_setup
 {
@@ -96,11 +117,11 @@ typedef struct s_world // WOndeRlanD
 	t_raycast	*ray;
 }	t_world;
 
-int		clean_init(t_world *world);
-int		clean_exit(t_world *world);
+int	clean_init(t_world *world);
+int	clean_exit(t_world *world);
 
 // utils.c
-void	t_free(char **split);
+void	ft_free(char **split);
 void	ft_clear(t_list *save);
 
 #endif
