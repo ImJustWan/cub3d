@@ -1,43 +1,29 @@
 #include "wonderland.h"
+#include "parsing.h"
 
-void	clear_textures(t_world *world)
+void	free_setup(t_setup *setup)
 {
-	int	i;
-
-	i = -1;
-	while (++i < 4)
-		free((*world).texture[i]);
-	free(world->texture);
-	free(world->setup->no);
-	free(world->setup->so);
-	free(world->setup->ea);
-	free(world->setup->we);
-}
-
-void	ft_free(char **split)
-{
-	int	i;
-
-	i = -1;
-	while (split[++i])
-	{
-		free(split[i]);
-		split[i] = NULL;
-	}
-	free(split);
+	if (setup->no)
+		free(setup->no);
+	if (setup->so)
+		free(setup->so);
+	if (setup->ea)
+		free(setup->ea);
+	if (setup->we)
+		free(setup->we);
+	free(setup);
 }
 
 int	clean_exit(t_world *world)
 {
 	if (!world)
 		exit (0);
-	clear_textures(world);
-	if (world->map)
-		ft_free(world->map);
 	if (world->ray)
 		free(world->ray);
+	if (world->map)
+		ft_free(world->map);
 	if (world->setup)
-		free(world->setup);
+		free_setup(world->setup);
 	if (world->player)
 		free(world->player);
 	if (world->mlx_ptr)
