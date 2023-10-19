@@ -1,53 +1,56 @@
-#include "display.h"
+#include "wonderland.h"
 
-int	load_texture(t_world *world, t_img *img, char *path, int i)
+int	clean_init_struct(t_world *world)
 {
-	int	x;
-	int	y;
-	int	color;
+	world->img = ft_calloc(1, sizeof(t_img));
+	if (!world->img)
+		return (1);
+	world->ray = ft_calloc(1, sizeof(t_raycast));
+	if (!world->ray)
+		return (1);
+	world->setup = ft_calloc(1, sizeof(t_setup));
+	if (!world->setup)
+		return (1);
+	world->player = ft_calloc(1, sizeof(t_player));
+	if (!world->player)
+		return (1);
+	return (0);
+}
 
-	img->img_ptr = mlx_xpm_file_to_image(world->mlx_ptr, \
-		path, &img->width, &img->height);
-	img->addr = (int *)mlx_get_data_addr(img->img_ptr, \
-		&img->bpp, &img->line_len, &img->endian);
-	y = -1;
-	while (++y < img->height)
+int	clean_init_textures(t_world *world)
+{
+	(*world).texture = (int **)malloc(sizeof(int *) * 4);
+	i = -1;
+	while (++i < 4)
 	{
-		x = -1;
-		while (++x < img->width)
-		{
-			color = img->addr[img->width * y + x];
-			world->texture[i][img->width * y + x] = color;
-		}
+		(*world).texture[i] = (int *)malloc(sizeof(int) * \
+			TEXTURE_HEIGHT * TEXTURE_WIDTH);
+		j = -1;
+		while (++j < TEXTURE_HEIGHT * TEXTURE_WIDTH)
+			(*world).texture[i][j] = 0;
+	}
+	i = -1;
+	while (++i < HEIGHT)
+	{
+		j = -1;
+		while (++j < WIDTH)
+			world->buffer[i][j] = 0;
 	}
 	return (0);
 }
 
-int	get_texture(t_world *world, int i)
+int	clean_init(t_world *world)
 {
-	char	*file;
-	t_img	img;
-
-	file = NULL;
-	if (i == 0)
-		load_texture(world, &img, "x_north.xpm", i);
-	if (i == 1)
-		load_texture(world, &img, "x_south.xpm", i);
-	if (i == 2)
-		load_texture(world, &img, "x_east.xpm", i);
-	if (i == 3)
-		load_texture(world, &img, "x_west.xpm", i);
-	mlx_destroy_image(world->mlx_ptr, img.img_ptr);
-	return (0);
-}
-
-int	init_textures(t_world *world, int **texture)
-{
-	int		i;
-
-	(void)texture;
-	i = -1;
-	while (++i < 4)
-		get_texture(world, i);
+	clean_init_struct(world);
+	clean_init_textures(world);
+	world->mlx_ptr = NULL;
+	world->win = NULL;
+	world->time = 0;
+	world->old_time = 0;
+	world->map = NULL;
+	world->setup->c = -1;
+	world->setup->f = -1;
+	world->setup->pos.x = 0;
+	world->setup->pos.y = 0;
 	return (0);
 }
