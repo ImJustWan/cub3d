@@ -72,6 +72,7 @@ int	parsing_map(t_world *world, t_list *read)
 	if (!world->map)
 		return (ft_clear(map_lst), FAIL);
 	if (world->setup->pos.x == 0 || world->setup->pos.y == 0)
-		return(ft_clear(map_lst), ft_error_msg(ERR, NULL, IMP, NPL), FAIL); //No player on map !
+		return (ft_clear(map_lst), \
+		ft_error_msg(ERR, NULL, IMP, NPL), FAIL);
 	return (ft_clear(map_lst), SUCCESS);
 }

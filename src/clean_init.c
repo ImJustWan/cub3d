@@ -16,6 +16,8 @@ int    clean_init(t_world *world)
     world->setup = ft_calloc(1, sizeof(t_setup));
     if (!world->setup)
         return (1);
+    world->setup->c = -1; //default setup before adding data
+    world->setup->f = -1; //default setup before adding data
     world->setup->pos.x = 0; //default setup before adding data
     world->setup->pos.y = 0; //default setup before adding data
     world->player = ft_calloc(1, sizeof(t_player));

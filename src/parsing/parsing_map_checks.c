@@ -35,7 +35,7 @@ int	player_info(t_world *world, char **map, int i, int j)
 
 int	comb_map(char **map, int i, int j)
 {
-	while(map[++i])
+	while (map[++i])
 	{
 		j = 0;
 		while (map[i][j])
@@ -45,7 +45,7 @@ int	comb_map(char **map, int i, int j)
 			j++;
 		}
 	}
-	return(SUCCESS);
+	return (SUCCESS);
 }
 
 int	map_verif(t_world *world, char **map, int i, int j)
@@ -61,7 +61,7 @@ int	map_verif(t_world *world, char **map, int i, int j)
 				j++;
 			else if (ft_strchr("0NSWE", map[i][j]) != NULL)
 			{
-				if (map[i][j] != '0' && player_info(world, map, i, j)) 
+				if (map[i][j] != '0' && player_info(world, map, i, j))
 					return (ft_error_msg(ERR, NULL, IMP, MPL), FAIL);
 				if (!check_surroundings(map, i, j))
 					j++;
@@ -69,7 +69,7 @@ int	map_verif(t_world *world, char **map, int i, int j)
 					return (ft_error_msg(ERR, NULL, IMP, WAL), FAIL);
 			}
 			else
-				return(FAIL);
+				return (FAIL);
 		}
 	}
 	return (SUCCESS);

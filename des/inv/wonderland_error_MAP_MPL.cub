@@ -1,8 +1,7 @@
-NO ./xpm/wonderland_wall_north
-SO ./xpm/wonderland_wall_south
-WE ./xpm/wonderland_wall_west
-EA ./xpm/wonderland_wall_east
-
+NO ./xpm/wonderland_wall_north.xpm
+SO ./xpm/wonderland_wall_south.xpm
+WE ./xpm/wonderland_wall_west.xpm
+EA ./xpm/wonderland_wall_east.xpm
 F 179,144,96
 C 159,228,245
 

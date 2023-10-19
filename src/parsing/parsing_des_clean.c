@@ -1,18 +1,19 @@
 #include "parsing.h"
 
-t_list *remove_first(t_list **read)
+t_list	*remove_first(t_list **read)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = (*read)->next;
 	ft_lstdelone((*read), free);
 	(*read) = tmp;
 	(*read)->prev = NULL;
-	return(tmp);
+	return (tmp);
 }
+
 void	remove_middle(t_list **read)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = (*read)->next;
 	(*read)->prev->next = (*read)->next;
@@ -23,8 +24,9 @@ void	remove_middle(t_list **read)
 
 t_list	*remove_empty_lines(t_list *read)
 {
-	t_list *head;
+	t_list	*head;
 
+	head = read;
 	while (read)
 	{
 		if (empty_line(read->content))
@@ -46,11 +48,12 @@ t_list	*remove_empty_lines(t_list *read)
 	}
 	return (head);
 }
+
 void	remove_newline(t_list *read)
 {
-	char *str;
+	char	*str;
 
-	while(read)
+	while (read)
 	{
 		str = (char *)read->content;
 		if (str && str[ft_strlen(str) - 1] == '\n')
@@ -58,4 +61,3 @@ void	remove_newline(t_list *read)
 		read = read->next;
 	}
 }
-

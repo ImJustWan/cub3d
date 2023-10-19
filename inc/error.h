@@ -28,12 +28,14 @@
 
 	// Textures & colors errors
 # define IFL "\1\033[1m\2Invalid file\1\033[0m\2"
-# define DUP "Duplicate file identifyier"
+# define XPM "Incorect file extension"
 # define COL "Invalid colors"
 # define MSC "Missing color(s)"
+# define MTX "Missing texture(s)"
 # define IID "Invalid identifyier"
 # define MFP "Missing identifyier or file path"
 # define MIF "To many information"
+# define DPX "Duplicate texture assignment"
 
 void	ft_error_msg(char *err, int *ptr, char *arg, char *str);
 
