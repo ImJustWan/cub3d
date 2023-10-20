@@ -1,0 +1,12 @@
+NO ./xpm/wonderland_wall_north.xpm
+SO ./xpm/wonderland_wall_south.xpm
+EA ./xpm/wonderland_wall_east.xpm
+WE ./xpm/wonderland_wall_west.xpm
+F 179,144,96
+C 159,228,245
+
+111111
+100001
+10S001
+100001
+111111 

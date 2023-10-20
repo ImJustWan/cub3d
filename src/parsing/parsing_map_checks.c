@@ -27,8 +27,8 @@ void	set_player_dir(t_world *world)
 	if (world->setup->orientation == SOUTH)
 	{
 		world->setup->dir.y = -1;
-		world->player->cam_plane.x = 0.00;
-		world->player->cam_plane.y = 0.66;
+		world->player->cam_plane.x = -0.66;
+		world->player->cam_plane.y = 0.00;
 	}
 	if (world->setup->orientation == EAST)
 	{

@@ -1,6 +1,7 @@
 #include "display.h"
 #include "hooks.h"
 
+
 int	loop(t_world *world)
 {
 	display_init(world);
