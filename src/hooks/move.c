@@ -9,7 +9,7 @@ void	left_right(t_world *world, t_move move)
 	{
 		x = (int)world->player->pos.x - world->player->cam_plane.x * MOVE_SPEED;
 		y = (int)world->player->pos.y - world->player->cam_plane.y * MOVE_SPEED;
-		if (x < WIDTH && y < HEIGHT && world->map[x][y] != '1')
+		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
 		{
 			world->player->pos.x -= world->player->cam_plane.x * MOVE_SPEED;
 			world->player->pos.y -= world->player->cam_plane.y * MOVE_SPEED;
@@ -19,7 +19,7 @@ void	left_right(t_world *world, t_move move)
 	{
 		x = (int)world->player->pos.x + world->player->cam_plane.x * MOVE_SPEED;
 		y = (int)world->player->pos.y + world->player->cam_plane.y * MOVE_SPEED;
-		if (x < WIDTH && y < HEIGHT && world->map[x][y] != '1')
+		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
 		{
 			world->player->pos.x += world->player->cam_plane.x * MOVE_SPEED;
 			world->player->pos.y += world->player->cam_plane.y * MOVE_SPEED;
@@ -36,7 +36,8 @@ void	front_back(t_world *world, t_move move)
 	{
 		x = (int)world->player->pos.x + world->player->dir.x * MOVE_SPEED;
 		y = (int)world->player->pos.y + world->player->dir.y * MOVE_SPEED;
-		if (x < WIDTH && y < HEIGHT && world->map[x][y] != '1')
+		printf(" player_dir y [%f]\n", world->player->dir.y);
+		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
 		{
 			world->player->pos.x += world->player->dir.x * MOVE_SPEED;
 			world->player->pos.y += world->player->dir.y * MOVE_SPEED;
@@ -46,7 +47,7 @@ void	front_back(t_world *world, t_move move)
 	{
 		x = (int)world->player->pos.x - world->player->dir.x * MOVE_SPEED;
 		y = (int)world->player->pos.y - world->player->dir.y * MOVE_SPEED;
-		if (x < WIDTH && y < HEIGHT && world->map[x][y] != '1')
+		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
 		{
 			world->player->pos.x -= world->player->dir.x * MOVE_SPEED;
 			world->player->pos.y -= world->player->dir.y * MOVE_SPEED;

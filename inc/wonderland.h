@@ -34,8 +34,8 @@
 # define EAST 2	
 # define WEST 3
 
-# define MOVE_SPEED 0.005
-# define ROT_SPEED 0.005
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.05
 
 typedef struct s_complex
 {
