@@ -38,28 +38,29 @@ void	front_back(t_world *world, t_move move)
 	{
 		y = (int)world->player->pos.y + world->player->dir.y * MOV_SPEED;
 		x = (int)world->player->pos.x;
-		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
+		if (world->map[y][x] != '1')
 			world->player->pos.y += world->player->dir.y * MOV_SPEED;
 		x = (int)world->player->pos.x + world->player->dir.x * MOV_SPEED;
 		y = (int)world->player->pos.y;
-		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
+		if (world->map[y][x] != '1')
 			world->player->pos.x += world->player->dir.x * MOV_SPEED;
 	}
 	if (move == back)
 	{
 		y = (int)world->player->pos.y - world->player->dir.y * MOV_SPEED;
 		x = (int)world->player->pos.x;
-		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
+		if (world->map[y][x] != '1')
 			world->player->pos.y -= world->player->dir.y * MOV_SPEED;
 		x = (int)world->player->pos.x - world->player->dir.x * MOV_SPEED;
 		y = (int)world->player->pos.y;
-		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
+		if (world->map[y][x] != '1')
 			world->player->pos.x -= world->player->dir.x * MOV_SPEED;
 	}
 }
 
 void	move_player(t_world *world, t_player *player)
 {
+	printf("pos.player[%f][%f]\n", world->player->pos.y, world->player->pos.x);
 	if (player->move.x == 1)
 		left_right(world, right);
 	if (player->move.x == -1)
