@@ -1,39 +1,6 @@
 #include "display.h"
 #include "hooks.h"
 
-/*
-- x goes from 0 to WIDTH
-	- each iteration matches a column 1/WIDTH 
-	- cam_x goes from -1 (furthest left) to 1 (furthest right) propotionnally to x
-- cam_plane.x is 0 at start
-- N / S
-	- ray->ray_dir.x goes from [cam_plane.x] to -[cam_plane.x] 
-	- ray->ray_dir.y stays at [cam_plane.y]
-- E / W
-	- ray->ray_dir.x stays at [cam_plane.x]
-	- ray->ray_dir.y goes from -[cam_plane.y] to -[cam_plane.y] 
-- cur_pos_x / cur_pos_y is the position of the player 
-	at the start, and then after every move
-- delta_dist is the hypotenuse of the triangle formed by the ray
-	- x = distance traveled by the ray between two x sides
-	- y = distance traveled by the ray between two y sides
-		(pythagore)
-		deltaX = sqrt(1 + (ray_dir.y * ray_dir.y) / (ray_dir.x * ray_dir.x))
-		deltaY = sqrt(1 + (ray_dir.x * ray_dir.x) / (ray_dir.y * ray_dir.y))
-			simplified to
-				deltaX = abs(1 / ray_dir.x)
-				deltaY = abs(1 / ray_dir.y)
-- if ray->ray_dir.x or ray->ray_dir.y = 0 
-	deltaX / deltaY set to INT_MAX to avoid division by 0
-- N / S
-	- deltaX goes from 1 to INT_MAX to 1
-	- deltaY = 1 
-- E / W
-	- deltaX = 1 
-	- deltaY goes from 1 to INT_MAX to 1
-
-*/
-
 void	start_raycast(t_world *world, t_raycast *ray, int x)
 {
 	ray->cam_x = 2 * x / (double)WIDTH - 1;
@@ -170,6 +137,7 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 	int	y;
 	int	color;
 
+	printf("x [%d]\n", x);
 	ray->step = 1.0 * TEXTURE_WIDTH / ray->wall_height;
 	ray->ray_height = ray->step * \
 		(ray->draw_start - HEIGHT / 2 + ray->wall_height / 2);

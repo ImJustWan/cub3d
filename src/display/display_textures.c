@@ -29,14 +29,14 @@ int	get_texture(t_world *world, int i)
 	t_img	img;
 
 	file = NULL;
-	if (i == NORTH)
-		load_texture(world, &img, world->setup->no, i);
-	if (i == SOUTH)
-		load_texture(world, &img, world->setup->so, i);
-	if (i == WEST)
-		load_texture(world, &img, world->setup->ea, i);
-	if (i == EAST)
-		load_texture(world, &img, world->setup->we, i);
+	if (i == 0)
+		load_texture(world, &img, "x_north.xpm", i);
+	if (i == 1)
+		load_texture(world, &img, "x_south.xpm", i);
+	if (i == 2)
+		load_texture(world, &img, "x_east.xpm", i);
+	if (i == 3)
+		load_texture(world, &img, "x_west.xpm", i);
 	mlx_destroy_image(world->mlx_ptr, img.img_ptr);
 	return (0);
 }
