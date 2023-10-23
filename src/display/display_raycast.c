@@ -67,14 +67,14 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 			ray->side = 1;
 		}
 		// printf("ray->cur_pos_x [%d] ray->cur_pos_x [%d]\n", ray->cur_pos_x, ray->cur_pos_y);
-		// if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
-		// 	|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_y]) \
-		// 	|| (map[ray->cur_pos_y][ray->cur_pos_x] == '1'))
+		if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
+			|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_x]) \
+			|| (map[ray->cur_pos_y][ray->cur_pos_x] == '1'))
+			wall = 1;
 		// if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
 		// 	|| (map[ray->cur_pos_x][ray->cur_pos_y] == '1'))
-		if (map[ray->cur_pos_y][ray->cur_pos_x] == '1' \
-			|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_y]))
-			wall = 1;
+		// if (map[ray->cur_pos_y][ray->cur_pos_x] == '1' \
+		// 	|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_y]))
 	}
 	// printf("ray->side_dist.y [%f]\n", ray->side_dist.y);
 	// printf("ray->delta_dist.y [%f]\n", ray->delta_dist.y);
@@ -89,9 +89,6 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 void	index_height_start_end(t_world *world, t_raycast *ray)
 {
 	(void)world;
-	if (ray->wall_dist < 1)
-		ray->wall_dist = 1.0;
-	// printf("ray->wall_dist [%f]\n", ray->wall_dist);
 	ray->wall_height = (int)(HEIGHT / (ray->wall_dist));
 	if (ray->side == 1)
 	{
@@ -143,10 +140,7 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 	y = -1;
 	// printf("draw_start [%d]\n", ray->draw_start);
 	while (++y < ray->draw_start)
-	{
-		// printf("segfault x [%d] y [%d]\n", x, y);
 		world->buffer[y][x] = world->setup->c;
-	}
 	while (y < ray->draw_end)
 	{
 		ray->y_on_tex = (int)ray->ray_height & (TEXTURE_HEIGHT - 1);
