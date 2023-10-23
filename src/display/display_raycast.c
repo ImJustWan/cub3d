@@ -1,5 +1,45 @@
 #include "hooks.h"
 
+
+/*
+- x goes from 0 to WIDTH
+	- each iteration matches a column 1/WIDTH 
+	- cam_x goes from -1 (furthest left) to 1 (furthest right) propotionnally to x
+	- regle de 3 (2x -> from 0 to 2 ; -1 -> from -1 to 1)
+- cam_x is 0 at start
+- N / S
+	- ray->ray_dir.x goes from [cam_plane.x] to -[cam_plane.x] 
+	- ray->ray_dir.y stays at 
+		- N stays at 1.0;
+		- S stays at -1.0;
+- E / W
+	- ray->ray_dir.x stays at 
+		- E stays at 1.0;
+		- W stays at -1.0;
+	- ray->ray_dir.y goes from -[cam_plane.y] to -[cam_plane.y] 
+- cur_pos_x / cur_pos_y is the position of the player 
+	at the start, and then after every move
+- delta_dist is the hypotenuse of the triangle formed by the ray
+	- x = distance traveled by the ray between two x sides
+	- y = distance traveled by the ray between two y sides
+		(pythagore)
+		deltaX = sqrt(1 + (ray_dir.y * ray_dir.y) / (ray_dir.x * ray_dir.x))
+		deltaY = sqrt(1 + (ray_dir.x * ray_dir.x) / (ray_dir.y * ray_dir.y))
+			simplified to
+				deltaX = abs(1 / ray_dir.x)
+				deltaY = abs(1 / ray_dir.y)
+- if ray->ray_dir.x or ray->ray_dir.y = 0 
+	deltaX / deltaY set to INT_MAX to avoid division by 0
+- N / S
+	- deltaX goes from 1 to INT_MAX to 1
+	- deltaY = 1 
+- E / W
+	- deltaX = 1 
+	- deltaY goes from 1 to INT_MAX to 1
+
+*/
+
+
 void	start_raycast(t_world *world, t_raycast *ray, int x)
 {
 	ray->cam_x = 2 * x / (double)WIDTH - 1;
@@ -7,7 +47,6 @@ void	start_raycast(t_world *world, t_raycast *ray, int x)
 		world->player->cam_plane.x * ray->cam_x;
 	ray->ray_dir.y = world->player->dir.y + \
 		world->player->cam_plane.y * ray->cam_x;
-	// printf("BEFORE ray->ray_dir.x [%f] ray->ray_dir.y [%f]\n", ray->ray_dir.x, ray->ray_dir.y);
 	ray->cur_pos_x = (int)world->player->pos.x;
 	ray->cur_pos_y = (int)world->player->pos.y;
 	if (ray->ray_dir.x == 0)
@@ -52,8 +91,6 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 	wall = 0;
 	while (wall != 1)
 	{
-		// printf("ray->delta_dist.x [%f] ray->delta_dist.y [%f]\n", ray->delta_dist.x, ray->delta_dist.y);
-		// printf("ray->side_dist.x [%f] ray->side_dist.y [%f]\n", ray->side_dist.x, ray->side_dist.y);
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
 			ray->side_dist.x += ray->delta_dist.x;
@@ -66,24 +103,15 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 			ray->cur_pos_y += ray->step_dir.y;
 			ray->side = 1;
 		}
-		// printf("ray->cur_pos_x [%d] ray->cur_pos_x [%d]\n", ray->cur_pos_x, ray->cur_pos_y);
 		if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
 			|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_x]) \
 			|| (map[ray->cur_pos_y][ray->cur_pos_x] == '1'))
 			wall = 1;
-		// if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
-		// 	|| (map[ray->cur_pos_x][ray->cur_pos_y] == '1'))
-		// if (map[ray->cur_pos_y][ray->cur_pos_x] == '1' \
-		// 	|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_y]))
 	}
-	// printf("ray->side_dist.y [%f]\n", ray->side_dist.y);
-	// printf("ray->delta_dist.y [%f]\n", ray->delta_dist.y);
-	// printf("ray->side [%f]\n", ray->side);
 	if (ray->side == 0)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
-	// printf("BEFORE ray->wall_dist [%f]\n", ray->wall_dist);
 }
 
 void	index_height_start_end(t_world *world, t_raycast *ray)
@@ -114,8 +142,8 @@ void	index_height_start_end(t_world *world, t_raycast *ray)
 	ray->x_on_tex = (int)(ray->wall_pos * (double)TEXTURE_WIDTH);
 	if ((ray->side == 0 && ray->ray_dir.x > 0)
 		|| (ray->side == 1 && ray->ray_dir.y < 0))
-		ray->x_on_tex = TEXTURE_WIDTH - ray->x_on_tex - 1;
-	ray->draw_start = (HEIGHT / 2) - (ray->wall_height / 2);
+		ray->x_on_tex = TEXTURE_WIDTH - 1 - ray->x_on_tex;
+	ray->draw_start = (-ray->wall_height / 2) + (HEIGHT / 2) ;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	ray->draw_end = (HEIGHT / 2) + (ray->wall_height) / 2;
@@ -133,17 +161,15 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 	int	y;
 	int	color;
 
-	ray->step = 1.0 * TEXTURE_WIDTH / ray->wall_height;
-	ray->ray_height = ray->step * \
-		(ray->draw_start - HEIGHT / 2 + ray->wall_height / 2);
-	// printf("ray->wall_height [%d]\n", ray->wall_height);
+	ray->step = 1.0 * TEXTURE_HEIGHT / ray->wall_height;
+	ray->ray_height = ((double)ray->draw_start - \
+		((double)HEIGHT / 2) + (ray->wall_height / 2)) * ray->step;
 	y = -1;
-	// printf("draw_start [%d]\n", ray->draw_start);
 	while (++y < ray->draw_start)
-		world->buffer[y][x] = world->setup->c;
+		world->buffer[y][x] = world->setup->f;
 	while (y < ray->draw_end)
 	{
-		ray->y_on_tex = (int)ray->ray_height & (TEXTURE_HEIGHT - 1);
+		ray->y_on_tex = (int)ray->ray_height % TEXTURE_HEIGHT;
 		ray->ray_height += ray->step;
 		color = world->texture[ray->index_texture] \
 			[TEXTURE_HEIGHT * ray->y_on_tex + ray->x_on_tex];
@@ -152,7 +178,7 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 		y++;
 	}
 	while (++y < HEIGHT)
-		world->buffer[y][x] = world->setup->f;
+		world->buffer[y][x] = world->setup->c;
 }
 
 // ray_height (ex depth) = tex_pos 

@@ -1,15 +1,15 @@
 #include "display.h"
 
-int	load_texture(t_world *world, t_img *img, char *path, int i)
+int load_texture(t_world *world, t_img *img, char *path, int i)
 {
-	int	x;
-	int	y;
-	int	color;
+	int x;
+	int y;
+	int color;
 
-	img->img_ptr = mlx_xpm_file_to_image(world->mlx_ptr, \
-		path, &img->width, &img->height);
-	img->addr = (int *)mlx_get_data_addr(img->img_ptr, \
-		&img->bpp, &img->line_len, &img->endian);
+	img->img_ptr = mlx_xpm_file_to_image(world->mlx_ptr,
+										path, &img->width, &img->height);
+	img->addr = (int *)mlx_get_data_addr(img->img_ptr,
+										 &img->bpp, &img->line_len, &img->endian);
 	y = -1;
 	while (++y < img->height)
 	{
@@ -23,27 +23,27 @@ int	load_texture(t_world *world, t_img *img, char *path, int i)
 	return (0);
 }
 
-int	get_texture(t_world *world, int i)
+int get_texture(t_world *world, int i)
 {
-	char	*file;
-	t_img	img;
+	char *file;
+	t_img img;
 
 	file = NULL;
-	if (i == 0)
-		load_texture(world, &img, "x_north.xpm", i);
-	if (i == 1)
-		load_texture(world, &img, "x_south.xpm", i);
-	if (i == 2)
-		load_texture(world, &img, "x_east.xpm", i);
-	if (i == 3)
-		load_texture(world, &img, "x_west.xpm", i);
+	if (i == NORTH)
+		load_texture(world, &img, world->setup->no, i);
+	if (i == SOUTH)
+		load_texture(world, &img, world->setup->so, i);
+	if (i == EAST)
+		load_texture(world, &img, world->setup->ea, i);
+	if (i == WEST)
+		load_texture(world, &img, world->setup->we, i);
 	mlx_destroy_image(world->mlx_ptr, img.img_ptr);
 	return (0);
 }
 
 int	init_textures(t_world *world, int **texture)
 {
-	int		i;
+	int	i;
 
 	(void)texture;
 	i = -1;

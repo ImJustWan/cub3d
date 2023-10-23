@@ -3,8 +3,8 @@
 
 int	init_player(t_world *world, t_player *player)
 {
-	player->pos.x = world->setup->pos.x;
-	player->pos.y = world->setup->pos.y;
+	player->pos.x = world->setup->pos.x + 0.5;
+	player->pos.y = world->setup->pos.y + 0.5;
 	player->dir.x = world->setup->dir.x;
 	player->dir.y = world->setup->dir.y;
 	world->player->rotate = 0;
@@ -15,6 +15,7 @@ int	init_player(t_world *world, t_player *player)
 
 int	init_raycast(t_world *world, t_raycast *ray)
 {
+	(void)world;
 	ray->draw_start = 0;
 	ray->draw_end = 0;
 	ray->cam_x = 0;
@@ -25,8 +26,8 @@ int	init_raycast(t_world *world, t_raycast *ray)
 	ray->cam_plane.y = 0;
 	ray->ray_dir.x = 0;
 	ray->ray_dir.y = 0;
-	ray->cur_pos_x = world->setup->pos.x;
-	ray->cur_pos_y = world->setup->pos.y;
+	ray->cur_pos_x = 0;
+	ray->cur_pos_y = 0;
 	ray->side_dist.x = 0;
 	ray->side_dist.y = 0;
 	ray->delta_dist.x = 0;
@@ -79,42 +80,6 @@ int	init_mlx(t_world *world)
 	return (0);
 }
 
-// void	fake_init(t_world *world)
-// {
-// 	world->player->pos.x = 1.5;
-// 	world->player->pos.y = 1.5;
-// 	world->from_scratch = 0;
-// 	world->setup->orientation = NORTH;
-// 	if (world->setup->orientation == NORTH)
-// 	{
-// 		world->player->dir.x = 0;
-// 		world->player->dir.y = -1;
-// 		world->player->cam_plane.x = 0.66;
-// 		world->player->cam_plane.y = 0.00;
-// 	}
-// 	if (world->setup->orientation == SOUTH)
-// 	{
-// 		world->player->dir.x = 1;
-// 		world->player->dir.y = 0;
-// 		world->player->cam_plane.x = 0.00;
-// 		world->player->cam_plane.y = 0.66;
-// 	}
-// 	if (world->setup->orientation == EAST)
-// 	{
-// 		world->player->dir.x = -1;
-// 		world->player->dir.y = 0;
-// 		world->player->cam_plane.x = 0.00;
-// 		world->player->cam_plane.y = -0.66;
-// 	}
-// 	if (world->setup->orientation == WEST)
-// 	{
-// 		world->player->dir.x = 0;
-// 		world->player->dir.y = 0;
-// 		world->player->cam_plane.x = 0;
-// 		world->player->cam_plane.y = 0.66;
-// 	}
-// }
-
 void	display_init(t_world *world)
 {
 	init_mlx(world);
@@ -122,5 +87,4 @@ void	display_init(t_world *world)
 	init_setup(world, world->setup);
 	init_player(world, world->player);
 	init_textures(world, world->texture);
-	// fake_init(world);
 }
