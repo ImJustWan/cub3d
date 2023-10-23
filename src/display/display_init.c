@@ -5,7 +5,6 @@ int	init_player(t_world *world, t_player *player)
 {
 	player->pos.x = world->setup->pos.x + 0.5;
 	player->pos.y = world->setup->pos.y + 0.5;
-	printf("world->setup->dir.x [%f] y [%f]\n", world->setup->dir.x, world->setup->dir.y);
 	player->dir.x = world->setup->dir.x;
 	player->dir.y = world->setup->dir.y;
 	world->player->rotate = 0;

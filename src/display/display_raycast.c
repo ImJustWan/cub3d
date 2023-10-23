@@ -41,6 +41,7 @@ void	start_raycast(t_world *world, t_raycast *ray, int x)
 		world->player->cam_plane.x * ray->cam_x;
 	ray->ray_dir.y = world->player->dir.y + \
 		world->player->cam_plane.y * ray->cam_x;
+	// printf("BEFORE ray->ray_dir.x [%f] ray->ray_dir.y [%f]\n", ray->ray_dir.x, ray->ray_dir.y);
 	ray->cur_pos_x = (int)world->player->pos.x;
 	ray->cur_pos_y = (int)world->player->pos.y;
 	if (ray->ray_dir.x == 0)
@@ -85,6 +86,8 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 	wall = 0;
 	while (wall != 1)
 	{
+		// printf("ray->delta_dist.x [%f] ray->delta_dist.y [%f]\n", ray->delta_dist.x, ray->delta_dist.y);
+		// printf("ray->side_dist.x [%f] ray->side_dist.y [%f]\n", ray->side_dist.x, ray->side_dist.y);
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
 			ray->side_dist.x += ray->delta_dist.x;
@@ -97,22 +100,33 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 			ray->cur_pos_y += ray->step_dir.y;
 			ray->side = 1;
 		}
+		// printf("ray->cur_pos_x [%d] ray->cur_pos_x [%d]\n", ray->cur_pos_x, ray->cur_pos_y);
 		// if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
-		// 	|| ray->cur_pos_x > (int)ft_strlen(map[ray->cur_pos_x]) \
+		// 	|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_y]) \
+		// 	|| (map[ray->cur_pos_y][ray->cur_pos_x] == '1'))
+		// if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
 		// 	|| (map[ray->cur_pos_x][ray->cur_pos_y] == '1'))
-		if (map[ray->cur_pos_y][ray->cur_pos_x] == '1')
+		if (map[ray->cur_pos_y][ray->cur_pos_x] == '1' \
+			|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_y]))
 			wall = 1;
 	}
+	// printf("ray->side_dist.y [%f]\n", ray->side_dist.y);
+	// printf("ray->delta_dist.y [%f]\n", ray->delta_dist.y);
+	// printf("ray->side [%f]\n", ray->side);
 	if (ray->side == 0)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
+	// printf("BEFORE ray->wall_dist [%f]\n", ray->wall_dist);
 }
 
 void	index_height_start_end(t_world *world, t_raycast *ray)
 {
 	(void)world;
-	ray->wall_height = (int)(HEIGHT / ray->wall_dist);
+	if (ray->wall_dist < 1)
+		ray->wall_dist = 1.0;
+	// printf("ray->wall_dist [%f]\n", ray->wall_dist);
+	ray->wall_height = (int)(HEIGHT / (ray->wall_dist));
 	if (ray->side == 1)
 	{
 		if (ray->ray_dir.y < 0)
@@ -159,12 +173,13 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 	ray->step = 1.0 * TEXTURE_WIDTH / ray->wall_height;
 	ray->ray_height = ray->step * \
 		(ray->draw_start - HEIGHT / 2 + ray->wall_height / 2);
+	// printf("ray->wall_height [%d]\n", ray->wall_height);
 	y = -1;
-	// printf("x [%d] y [%d]\n", x, y);
+	// printf("draw_start [%d]\n", ray->draw_start);
 	while (++y < ray->draw_start)
 	{
 		// printf("segfault x [%d] y [%d]\n", x, y);
-		world->buffer[y][x] = world->setup->f;
+		world->buffer[y][x] = world->setup->c;
 	}
 	while (y < ray->draw_end)
 	{
@@ -177,7 +192,7 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 		y++;
 	}
 	while (++y < HEIGHT)
-		world->buffer[y][x] = world->setup->c;
+		world->buffer[y][x] = world->setup->f;
 }
 
 // ray_height (ex depth) = tex_pos 
@@ -218,7 +233,7 @@ int	display_raycast(t_world *world)
 {
 	move_player(world, world->player);
 	rotate_player(world, world->player);
-	printf("player->pos[%f][%f]\n", world->player->pos.x, world->player->pos.y);
+	// printf("player->pos[%f][%f]\n", world->player->pos.x, world->player->pos.y);
 	// printf("DIRECTION [%d]\n", world->setup->orientation);
 	big_loop(world);
 	return (0);
