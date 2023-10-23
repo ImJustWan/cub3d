@@ -3,8 +3,8 @@
 
 int	init_player(t_world *world, t_player *player)
 {
-	player->pos.x = world->setup->pos.x + 0.5;
-	player->pos.y = world->setup->pos.y + 0.5;
+	player->pos.x = world->setup->pos.x;
+	player->pos.y = world->setup->pos.y;
 	player->dir.x = world->setup->dir.x;
 	player->dir.y = world->setup->dir.y;
 	world->player->rotate = 0;
@@ -46,7 +46,8 @@ int	init_setup(t_world *world, t_setup *setup)
 	int	i;
 	int	j;
 
-	(void)setup;
+	(void)world;
+	setup->orientation = -1;
 	if (world->from_scratch == 1)
 	{
 		i = -1;
@@ -117,7 +118,7 @@ int	init_mlx(t_world *world)
 void	display_init(t_world *world)
 {
 	init_mlx(world);
-	// init_raycast(world, world->ray);
+	init_raycast(world, world->ray);
 	init_setup(world, world->setup);
 	init_player(world, world->player);
 	init_textures(world, world->texture);
