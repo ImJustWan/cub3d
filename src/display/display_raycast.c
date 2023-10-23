@@ -1,9 +1,3 @@
-* y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
-    texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
-    texture[3][texWidth * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-    texture[4][texWidth * y + x] = 256 * xorcolor; //xor green
-    texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-    texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient#include "display.h"
 #include "hooks.h"
 
 void	start_raycast(t_world *world, t_raycast *ray, int x)
@@ -142,7 +136,6 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 	int	y;
 	int	color;
 
-	printf("x [%d]\n", x);
 	ray->step = 1.0 * TEXTURE_WIDTH / ray->wall_height;
 	ray->ray_height = ray->step * \
 		(ray->draw_start - HEIGHT / 2 + ray->wall_height / 2);
@@ -206,8 +199,6 @@ int	display_raycast(t_world *world)
 {
 	move_player(world, world->player);
 	rotate_player(world, world->player);
-	// printf("player->pos[%f][%f]\n", world->player->pos.x, world->player->pos.y);
-	// printf("DIRECTION [%d]\n", world->setup->orientation);
 	big_loop(world);
 	return (0);
 }
