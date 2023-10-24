@@ -1,6 +1,12 @@
 #include "hooks.h"
 #include "display.h"
 
+/*
+    the_actual_raycasting
+    This final function is the one actually casting the ray 
+    and placing the right texture stripe on our buffer (future image)
+*/
+
 void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 {
 	int	y;
@@ -42,6 +48,23 @@ void	raycast_to_window(t_world *world)
 		world->img->img_ptr, 0, 0);
 }
 
+/*
+    Big_loop 
+	Scans the screen width from left (x = -1) to right (x = WIDTH)
+    and calls all the necessary functions to create an image.
+    Once all of the pixels of an image are 
+	computed and stored in the buffer, 
+    the buffer content is copied to the image address
+	before pushing the image to the window.
+    
+    1.    start ray_cast
+    2.    step_dir_side_dist
+    3.    wall_dist_and_side
+    4.    index_height
+    5.    start_end
+    6.    the_actual_raycasting
+ */
+
 void	big_loop(t_world *world)
 {
 	int	x;
@@ -58,6 +81,16 @@ void	big_loop(t_world *world)
 	}
 	raycast_to_window(world);
 }
+
+/* Display raycast calls 3 main function that
+		will determin what we see on the screen.
+    1.    The position of the player: move_player.
+        Which is modified via the key hooks.
+    2.    The player's orientation: rotate_player.
+        Which is also midified via the key hooks.
+    3.    The big_loop calculating each ray of the screen
+		before pushing all the pixels to the screen.
+*/
 
 int	display_raycast(t_world *world)
 {

@@ -43,3 +43,7 @@ void	get_hooks(t_world *world)
 	mlx_hook(world->win, KeyPress, KeyPressMask, keys_press, world);
 	mlx_hook(world->win, KeyRelease, KeyReleaseMask, keys_release, world);
 }
+
+/*
+ mlx_hook(world->win, MotionNotify, PointerMotionMask, handle_mouse, world);
+ */

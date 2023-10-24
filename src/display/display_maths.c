@@ -1,4 +1,4 @@
-#include "display.h"
+#include "wonderland.h"
 
 /*
 - x goes from 0 to WIDTH
@@ -57,6 +57,16 @@ void	start_raycast(t_world *world, t_raycast *ray, int x)
 		ray->delta_dist.y = fabs(1 / ray->ray_dir.y);
 }
 
+/*
+    step_dir_side_dist
+    While the function start_raycast allows us to compute 
+		the distance travelled between the x sides or y sides of the box, 
+    	we need to compute the x and y distance between the player's position 
+		and the x and y sides of the next boxes.
+    Depending on the payer's orientation this function 
+		computes the distance to the nearest box.
+*/
+
 void	step_dir_side_dist(t_player *player, t_raycast *ray)
 {
 	if (ray->ray_dir.x < 0)
@@ -82,6 +92,12 @@ void	step_dir_side_dist(t_player *player, t_raycast *ray)
 			(ray->cur_pos_y + 1.0 - player->pos.y);
 	}
 }
+
+/*
+    wall_dist_and_side
+    This function compute the total length of the ray cased
+		between the player and the wall.
+*/
 
 void	wall_dist_and_side(t_raycast *ray, char **map)
 {
@@ -109,6 +125,13 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 	}
 }
 
+/*
+    index_height
+    This function is computing the heigth of the wall 
+    depending on its distance from the player.
+    It will also pick the correct texture depending on the wall orientation.
+*/
+
 void	index_height(t_world *world, t_raycast *ray)
 {
 	(void)world;
@@ -132,6 +155,13 @@ void	index_height(t_world *world, t_raycast *ray)
 			ray->index_texture = EAST;
 	}
 }
+
+/*
+    start_end
+    This function establish which stripe of texture will be used for our ray, 
+    as well as the height of the textured ray 
+    and where it should be printed on the screen.
+*/
 
 void	start_end(t_world *world, t_raycast *ray)
 {
