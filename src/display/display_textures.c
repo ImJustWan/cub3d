@@ -1,15 +1,15 @@
 #include "display.h"
 
-int load_texture(t_world *world, t_img *img, char *path, int i)
+int	load_texture(t_world *world, t_img *img, char *path, int i)
 {
-	int x;
-	int y;
-	int color;
+	int	x;
+	int	y;
+	int	color;
 
 	img->img_ptr = mlx_xpm_file_to_image(world->mlx_ptr,
-										path, &img->width, &img->height);
+			path, &img->width, &img->height);
 	img->addr = (int *)mlx_get_data_addr(img->img_ptr,
-										 &img->bpp, &img->line_len, &img->endian);
+			&img->bpp, &img->line_len, &img->endian);
 	y = -1;
 	while (++y < img->height)
 	{
@@ -23,10 +23,10 @@ int load_texture(t_world *world, t_img *img, char *path, int i)
 	return (0);
 }
 
-int get_texture(t_world *world, int i)
+int	get_texture(t_world *world, int i)
 {
-	char *file;
-	t_img img;
+	char	*file;
+	t_img	img;
 
 	file = NULL;
 	if (i == NORTH)

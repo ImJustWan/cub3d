@@ -84,6 +84,7 @@ void	step_dir_side_dist(t_player *player, t_raycast *ray)
 			(ray->cur_pos_y + 1.0 - player->pos.y);
 	}
 }
+
 void	wall_dist_and_side(t_raycast *ray, char **map)
 {
 	int	wall;
@@ -103,37 +104,40 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 			ray->cur_pos_y += ray->step_dir.y;
 			ray->side = 1;
 		}
-		// printf("ray->cur_pos_y [%d]\n", ray->cur_pos_y);
 		if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
 			|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_y]) \
 			|| !map[ray->cur_pos_y]
 			|| (map[ray->cur_pos_y][ray->cur_pos_x] == '1'))
 			wall = 1;
 	}
+}
+
+void	index_height(t_world *world, t_raycast *ray)
+{
+	(void)world;
 	if (ray->side == 0)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
-}
-
-void	index_height_start_end(t_world *world, t_raycast *ray)
-{
-	(void)world;
 	ray->wall_height = (int)(HEIGHT / (ray->wall_dist));
 	if (ray->side == 1)
 	{
 		if (ray->ray_dir.y < 0)
-			ray->index_texture = SOUTH;
-		else
 			ray->index_texture = NORTH;
+		else
+			ray->index_texture = SOUTH;
 	}
 	else
 	{
 		if (ray->ray_dir.x < 0)
-			ray->index_texture = EAST;
-		else
 			ray->index_texture = WEST;
+		else
+			ray->index_texture = EAST;
 	}
+}
+
+void	start_end(t_world *world, t_raycast *ray)
+{
 	if (ray->side == 0)
 		ray->wall_pos = world->player->pos.y + \
 			(ray->wall_dist * ray->ray_dir.y);
@@ -211,7 +215,8 @@ void	big_loop(t_world *world)
 		start_raycast(world, world->ray, x);
 		step_dir_side_dist(world->player, world->ray);
 		wall_dist_and_side(world->ray, world->map);
-		index_height_start_end(world, world->ray);
+		index_height(world, world->ray);
+		start_end(world, world->ray);
 		the_actual_raycasting(world, world->ray, x);
 	}
 	raycast_to_window(world);

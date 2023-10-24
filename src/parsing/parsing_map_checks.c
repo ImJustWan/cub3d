@@ -18,25 +18,25 @@ int	check_surroundings(char **map, int i, int j)
 
 void	set_player_dir(t_world *world)
 {
-	if (world->setup->orientation == SOUTH)
-	{
-		world->setup->dir.y = 1;
-		world->player->cam_plane.x = 0.66;
-		world->player->cam_plane.y = 0.00;
-	}
 	if (world->setup->orientation == NORTH)
 	{
 		world->setup->dir.y = -1;
+		world->player->cam_plane.x = 0.66;
+		world->player->cam_plane.y = 0.00;
+	}
+	if (world->setup->orientation == SOUTH)
+	{
+		world->setup->dir.y = 1;
 		world->player->cam_plane.x = -0.66;
 		world->player->cam_plane.y = 0.00;
 	}
-	if (world->setup->orientation == WEST)
+	if (world->setup->orientation == EAST)
 	{
 		world->setup->dir.x = 1;
 		world->player->cam_plane.x = 0.00;
 		world->player->cam_plane.y = -0.66;
 	}
-	if (world->setup->orientation == EAST)
+	if (world->setup->orientation == WEST)
 	{
 		world->setup->dir.x = -1;
 		world->player->cam_plane.x = 0;

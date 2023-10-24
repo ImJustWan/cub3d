@@ -8,9 +8,7 @@ int	loop(t_world *world)
 	while (world->map[++i])
 		printf("map[%d] is [%s]\n", i, world->map[i]);
 	display_init(world);
-	mlx_hook(world->win, DESTROY, 0, clean_exit, world);
-	mlx_hook(world->win, KeyPress, KeyPressMask, keys_press, world);
-	mlx_hook(world->win, KeyRelease, KeyReleaseMask, keys_release, world);
+	get_hooks(world);
 	display_raycast(world);
 	mlx_loop_hook(world->mlx_ptr, display_raycast, world);
 	mlx_loop(world->mlx_ptr);

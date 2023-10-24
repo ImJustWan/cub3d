@@ -11,6 +11,8 @@ typedef enum e_move
 	right,
 }	t_move;
 
+void	get_hooks(t_world *world);
+
 int	    keys_press(int button, t_world *world);
 int	    keys_release(int button, t_world *world);
 int	    handle_mouse(int button, int x, int y, t_world *world);

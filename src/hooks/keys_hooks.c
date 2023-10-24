@@ -3,9 +3,9 @@
 
 int	keys_release(int button, t_world *world)
 {
-	if (button == RIGHT && world->player->rotate <= 1)
+	if (button == LEFT && world->player->rotate <= 1)
 		world->player->rotate = 0;
-	if (button == LEFT && world->player->rotate >= 1)
+	if (button == RIGHT && world->player->rotate >= 1)
 		world->player->rotate = 0;
 	if (button == KEY_W && world->player->move.y == 1)
 		world->player->move.y = 0;
@@ -20,9 +20,9 @@ int	keys_release(int button, t_world *world)
 
 int	keys_press(int button, t_world *world)
 {
-	if (button == RIGHT)
-		world->player->rotate -= 1;
 	if (button == LEFT)
+		world->player->rotate -= 1;
+	if (button == RIGHT)
 		world->player->rotate += 1;
 	if (button == KEY_W)
 		world->player->move.y = 1;
@@ -35,4 +35,11 @@ int	keys_press(int button, t_world *world)
 	if (button == ESC)
 		clean_exit(world);
 	return (0);
+}
+
+void	get_hooks(t_world *world)
+{
+	mlx_hook(world->win, DESTROY, 0, clean_exit, world);
+	mlx_hook(world->win, KeyPress, KeyPressMask, keys_press, world);
+	mlx_hook(world->win, KeyRelease, KeyReleaseMask, keys_release, world);
 }
