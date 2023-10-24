@@ -59,6 +59,7 @@ int	player_info(t_world *world, char **map, int i, int j)
 	else if (map[i][j] == 'W')
 		world->setup->orientation = WEST;
 	set_player_dir(world);
+	map[i][j] = '0';
 	return (SUCCESS);
 }
 

@@ -19,6 +19,6 @@ void	ft_error_msg(char *err, int *ptr, char *arg, char *str)
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd("\n", 2);
 	}
-	else 
+	else
 		perror(NULL);
 }

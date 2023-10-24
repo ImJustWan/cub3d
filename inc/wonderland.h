@@ -34,8 +34,8 @@
 # define EAST 2	
 # define WEST 3
 
-# define MOV_SPEED 0.0045
-# define ROT_SPEED 0.0045
+# define MOV_SPEED 0.006
+# define ROT_SPEED 0.005
 
 typedef struct s_complex
 {
@@ -96,11 +96,11 @@ typedef struct s_setup
 	int			c;
 	int			f;
 	int			orientation;
-	t_complex	pos; // fill with start pos
-	t_complex	dir; // fill with start dir (vector format)
+	t_complex	pos;
+	t_complex	dir;
 }	t_setup;
 
-typedef struct s_world // WOndeRlanD
+typedef struct s_world
 {
 	void		*mlx_ptr;
 	void		*win;
@@ -117,8 +117,8 @@ typedef struct s_world // WOndeRlanD
 	t_raycast	*ray;
 }	t_world;
 
-int	clean_init(t_world *world);
-int	clean_exit(t_world *world);
+int		clean_init(t_world *world);
+int		clean_exit(t_world *world);
 
 // utils.c
 void	ft_free(char **split);

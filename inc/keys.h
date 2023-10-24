@@ -6,7 +6,7 @@
 /*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:52:59 by tgibier           #+#    #+#             */
-/*   Updated: 2023/10/18 16:56:03 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:24:24 by tgibier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define MOUSE_RIGHT	3
 # define MOUSE_SCR_UP	4
 # define MOUSE_SCR_DOWN	5
-
 
 # define LEFT	65361
 # define UP		65362

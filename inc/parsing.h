@@ -27,21 +27,20 @@ int		parsing_map(t_world *world, t_list *read);
 // parsing_map_checks.c
 int		check_surroundings(char **map, int i, int j);
 int		player_info(t_world *world, char **map, int i, int j);
-int	map_verif(t_world *world, char **map, int i, int j);
+int		map_verif(t_world *world, char **map, int i, int j);
 
 // parsing_description.c
 int		parsing_description(t_world *world, t_list *read);
 
 // parsing_des_textures.c
-int	texture_save(t_world *world, char **split);
+int		texture_save(t_world *world, char **split);
 
 // parsing_description_clean.c
 t_list	*remove_empty_lines(t_list *read);
 void	remove_newline(t_list *read);
 
 // parsing_description_colors.c
-int	color_save(t_world *world, char **split);
-
+int		color_save(t_world *world, char **split);
 
 // // utils.c
 int		empty_line(char *str);
@@ -49,7 +48,6 @@ int		map_size(t_list *map_lst);
 int		ft_table_size(char **table);
 void	ft_del_node(t_list *lst, void (*del)(void*));
 void	free_split(char **split);
-
 
 // int	file_access(char *path);
 // // parsing_read.c

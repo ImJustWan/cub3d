@@ -19,4 +19,10 @@ void	display_background(t_world *world);
 int		get_color(t_world *world, int x, int y, int i);
 void	img_pix_put(t_img *img, int x, int y, int color);
 
+void	start_raycast(t_world *world, t_raycast *ray, int x);
+void	step_dir_side_dist(t_player *player, t_raycast *ray);
+void	wall_dist_and_side(t_raycast *ray, char **map);
+void	index_height(t_world *world, t_raycast *ray);
+void	start_end(t_world *world, t_raycast *ray);
+
 #endif

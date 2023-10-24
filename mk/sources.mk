@@ -9,6 +9,7 @@ SRCS += ./src/parsing/parsing_des_clean.c
 SRCS += ./src/parsing/parsing_des_colors.c
 SRCS += ./src/parsing/parsing.c
 SRCS += ./src/parsing/parsing_des_textures.c
+SRCS += ./src/display/display_maths.c
 SRCS += ./src/display/display_utils.c
 SRCS += ./src/display/loop.c
 SRCS += ./src/display/display_init.c

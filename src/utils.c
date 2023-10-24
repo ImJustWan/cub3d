@@ -1,6 +1,6 @@
-# include "wonderland.h"
+#include "wonderland.h"
 
-void ft_free(char **split)
+void	ft_free(char **split)
 {
 	int	i;
 
@@ -14,7 +14,7 @@ void ft_free(char **split)
 	free(split);
 }
 
-void    ft_clear(t_list *save)
+void	ft_clear(t_list *save)
 {
 	t_list	*temp;
 	t_list	*next;
