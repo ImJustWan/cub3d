@@ -105,7 +105,7 @@ void	wall_dist_and_side(t_raycast *ray, char **map)
 		}
 		// printf("ray->cur_pos_y [%d]\n", ray->cur_pos_y);
 		if (ray->cur_pos_x < 0.25 || ray->cur_pos_y < 0.25 \
-			|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_x]) \
+			|| ray->cur_pos_x >= (int)ft_strlen(map[ray->cur_pos_y]) \
 			|| !map[ray->cur_pos_y]
 			|| (map[ray->cur_pos_y][ray->cur_pos_x] == '1'))
 			wall = 1;

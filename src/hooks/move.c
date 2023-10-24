@@ -9,7 +9,7 @@ void	left_right(t_world *world, t_move move)
 	{
 		x = (int)world->player->pos.x - world->player->cam_plane.x * MOV_SPEED;
 		y = (int)world->player->pos.y;
-		if (x < WIDTH && y < HEIGHT && world->map[y][x] != '1')
+		if (x < (int)ft_strlen(world->map[y]) && world->map[y][x] != '1')
 			world->player->pos.x -= world->player->cam_plane.x * MOV_SPEED;
 		y = (int)world->player->pos.y - world->player->cam_plane.y * MOV_SPEED;
 		x = (int)world->player->pos.x;
@@ -60,7 +60,7 @@ void	front_back(t_world *world, t_move move)
 
 void	move_player(t_world *world, t_player *player)
 {
-	printf("pos.player[%f][%f]\n", world->player->pos.y, world->player->pos.x);
+	// printf("pos.player[%f][%f]\n", world->player->pos.y, world->player->pos.x);
 	if (player->move.x == 1)
 		left_right(world, right);
 	if (player->move.x == -1)

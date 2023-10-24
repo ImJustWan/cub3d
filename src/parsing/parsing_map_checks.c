@@ -48,8 +48,8 @@ int	player_info(t_world *world, char **map, int i, int j)
 {
 	if (world->setup->pos.x != 0 || world->setup->pos.y != 0)
 		return (FAIL);
-	world->setup->pos.x = i;
-	world->setup->pos.y = j;
+	world->setup->pos.x = j;
+	world->setup->pos.y = i;
 	if (map[i][j] == 'N')
 		world->setup->orientation = NORTH;
 	else if (map[i][j] == 'S')
