@@ -38,6 +38,10 @@
 # define ROT_SPEED 0.0045
 # define EDG_DIST 20
 
+# ifndef BONUS
+#  define BONUS 1
+# endif
+
 typedef struct s_complex
 {
 	double	x;

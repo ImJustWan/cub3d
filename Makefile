@@ -1,15 +1,16 @@
-
 -include mk/includes.mk
 -include mk/sources.mk
 -include mk/colors.mk
 
 # Das Progamm
 NAME			=	cub3d
-NAME_BONUS		=	bonus
+
+# Version
+BONUS			=	0
 
 # Compiler
 CC				=	cc
-CFLAGS			=	-g3 -Wall -Werror -Wextra -MMD
+CFLAGS			=	-Wall -Werror -Wextra -MMD -g
 LDFLAGS			=	-L $(LIBFT_PATH) -lft
 MLXFLAGS		=	-lX11 -lXext -L $(MLX_PATH) -lmlx -lm
 
@@ -19,13 +20,13 @@ LIBFT_NAME		=	libft.a
 LIBFT			=	$(LIBFT_PATH)$(LIBFT_NAME)
 
 # Minilibx
-MLX_PATH		=	minilibx-linux/
+MLX_PATH		=	mlx/
 MLX_NAME		=	libmlx.a
 MLX				=	$(MLX_PATH)$(MLX_NAME)
 
 HEAD			=	-I ./inc/ \
 					-I ./libft/inc \
-					-I ./minilibx-linux/ 
+					-I ./mlx/ 
 
 DEPS			=	${OBJS:.o=.d}
 
@@ -45,7 +46,7 @@ all : ${NAME}
 
 $(OBJS_PATH)/%.o : %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@ $(HEAD)
+	@$(CC) $(CFLAGS) -DBONUS=$(BONUS) -c $< -o $@ $(HEAD)
 	@printf "$(_FOREST_GREEN)🐛 Falling asleep... %-50s \r" $@
 
 $(OBJS_PATH) :
@@ -56,26 +57,40 @@ $(LIBFT) :
 	@echo "$(_GOLD)Summoning libft's madhatter$(_END)"
 	@make -sC $(LIBFT_PATH)
 
-$(MLX) : 
-	@echo "$(_LILAC)Crafting MiniLibX$(_END)"
+$(MLX) :
+	@echo "$(_LILAC)Downloading & crafting MiniLibX$(_END)"
+	@if [ -d mlx];then echo mlx ok;else git clone https://github.com/42Paris/minilibx-linux.git mlx;fi
 	@make -sC $(MLX_PATH)
 
 $(NAME) : $(LIBFT) $(MLX) $(OBJS_PATH) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(LDFLAGS) $(MLX) $(MLXFLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) -DBONUS=$(BONUS) -o $(NAME) $(LIBFT) $(LDFLAGS) $(MLX) $(MLXFLAGS)
 	@echo "\n🐇$(_FOREST_GREEN)$(_BOLD) DOWN THE RABBIT HOLE WE GO $(_END)🐇"
+
+pack:
+	@echo "$(_LILAC)Downloading textures and maps$(_END)"
+	@git clone git@github.com:Makasabi/Cub3d_textures_maps_pack.git pack
+	@mv pack/xpm ./
+	@mv pack/des ./
+	@rm -rf pack
 
 clean:
 	@echo "$(_AQUAMARINE)Which potion will it be ? $(_END)"
 	@rm -rf $(OBJS_PATH)
 	@rm -rf $(OBJS)
 	@make clean -C libft
-	@make clean -C minilibx-linux
+	@rm -rf mlx
 	
 fclean:	clean
 	@echo "$(_AQUAMARINE)$(_BOLD)🗝️ Leaving Wonderland 🎩$(_END)"
 	@rm -rf $(NAME)
-	@rm -rf $(BONUS)
 	@make fclean -C libft
+
+texclear:
+	@rm -rf des
+	@rm -rf xpm
+
+bonus:
+	make re BONUS=1
 
 re:	fclean all
 

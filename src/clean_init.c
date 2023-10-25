@@ -7,13 +7,13 @@ int	clean_init_struct(t_world *world)
 		return (1);
 	world->ray = ft_calloc(1, sizeof(t_raycast));
 	if (!world->ray)
-		return (1);
+		return (free(world->img), 1);
 	world->setup = ft_calloc(1, sizeof(t_setup));
 	if (!world->setup)
-		return (1);
+		return (free(world->img), free(world->ray), 1);
 	world->player = ft_calloc(1, sizeof(t_player));
 	if (!world->player)
-		return (1);
+		return (free(world->img), free(world->ray), free(world->setup), 1);
 	return (0);
 }
 
@@ -40,6 +40,10 @@ int	clean_init(t_world *world)
 	world->mlx_ptr = NULL;
 	world->win = NULL;
 	world->time = 0;
+	world->tab_tex[0].texture = NULL;
+	world->tab_tex[1].texture = NULL;
+	world->tab_tex[2].texture = NULL;
+	world->tab_tex[3].texture = NULL;
 	world->from_scratch = 0;
 	world->old_time = 0;
 	world->map = NULL;

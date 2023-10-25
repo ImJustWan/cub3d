@@ -9,7 +9,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_error_msg(ERR, &argc, ARG, USG), 1);
-	clean_init(&world);
+	if (clean_init(&world))
+		return (1);
 	if (parsing(&world, argv))
 		clean_exit(&world);
 	if (loop(&world))
