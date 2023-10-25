@@ -59,7 +59,7 @@ $(LIBFT) :
 
 $(MLX) :
 	@echo "$(_LILAC)Downloading & crafting MiniLibX$(_END)"
-	@if [ -d mlx];then echo mlx ok;else git clone https://github.com/42Paris/minilibx-linux.git mlx;fi
+	@if [ -d mlx];then echo ok;else git clone https://github.com/42Paris/minilibx-linux.git mlx;fi
 	@make -sC $(MLX_PATH)
 
 $(NAME) : $(LIBFT) $(MLX) $(OBJS_PATH) $(OBJS)
@@ -90,7 +90,9 @@ texclear:
 	@rm -rf xpm
 
 bonus:
-	@make clean
+	@rm $(NAME)
+	@rm -rf $(OBJS_PATH)
+	@rm -rf $(OBJS)
 	make BONUS=1
 
 re:	fclean all

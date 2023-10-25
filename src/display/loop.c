@@ -6,8 +6,8 @@ int	loop(t_world *world)
 	int	i;
 
 	i = -1;
-	while (world->map[++i])
-		printf("map[%d] is [%s]\n", i, world->map[i]);
+	// while (world->map[++i])
+	// 	printf("map[%d] is [%s]\n", i, world->map[i]);
 	if (display_init(world))
 		return (1);
 	get_hooks(world);
