@@ -85,7 +85,7 @@ fclean:	clean
 	@rm -rf $(NAME)
 	@make fclean -C libft
 
-texclear:
+cleanpack:
 	@rm -rf des
 	@rm -rf xpm
 
