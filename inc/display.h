@@ -13,7 +13,7 @@ int		init_raycast(t_world *world, t_raycast *ray);
 int		init_player(t_world *world, t_player *player);
 int		init_textures(t_world *world);
 
-int 	display(t_world *world);
+int		display(t_world *world);
 int		display_raycast(t_world *world);
 void	display_background(t_world *world);
 

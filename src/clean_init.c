@@ -27,10 +27,10 @@ int	clean_init_buffer(t_world *world)
 	int	j;
 
 	i = -1;
-	while (++i < HEIGHT)
+	while (++i < 11)
 	{
 		j = -1;
-		while (++j < WIDTH)
+		while (++j < 11)
 			world->buffer[i][j] = 0;
 	}
 	return (0);

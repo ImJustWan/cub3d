@@ -40,10 +40,23 @@
 # define ROT_SPEED 0.0045
 # define EDG_DIST 20
 
-
 # ifndef BONUS
-#  define BONUS 1
+#  define BONUS 0
 # endif
+
+typedef enum e_direction
+{
+	a_left,
+	a_right,
+	a_up,
+	a_down
+}t_dir;
+
+typedef struct s_arrow
+{
+	int		*old_pos;
+	t_dir	dir;
+}t_arrow;
 
 typedef enum e_draw_color
 {
@@ -53,9 +66,8 @@ typedef enum e_draw_color
 	PINK = 0x00FF00FF,
 	ORANGE = 0x00DF7401,
 	MOUNTBATTEN = 0x00997A8D,
-	COOL_GRAY = 0x008C92AC,
+	COOL_GRAY = 0x008C92AC
 }	t_draw_color;
-
 
 typedef struct s_complex
 {
@@ -137,7 +149,7 @@ typedef struct s_world
 	double		old_time;
 	int			from_scratch;
 	int			buffer[HEIGHT][WIDTH];
-	int			mini_buff[MINI_HEIGHT][MINI_WIDTH];
+	char		mini_buff[11][11];
 	t_img		*img;
 	t_img		*minimap;
 	t_texture	tab_tex[4];
@@ -145,7 +157,6 @@ typedef struct s_world
 	t_setup		*setup;
 	t_raycast	*ray;
 }	t_world;
-
 
 int		clean_init(t_world *world);
 int		clean_exit(t_world *world);

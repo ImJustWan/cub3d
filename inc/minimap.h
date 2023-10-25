@@ -3,6 +3,6 @@
 
 # include "wonderland.h"
 
-int minimap(t_world *world);
+int	minimap(t_world *world);
 
 #endif

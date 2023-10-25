@@ -100,13 +100,16 @@ int	display_raycast(t_world *world)
 {
 	move_player(world, world->player);
 	rotate_player(world, world->player);
+	if (BONUS)
+		world->player->rotate = 0;
 	big_loop(world);
-	minimap(world);
 	return (0);
 }
 
 int	display(t_world *world)
 {
+	if (BONUS)
+		minimap(world);
 	move_player(world, world->player);
 	rotate_player(world, world->player);
 	display_raycast(world);

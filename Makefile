@@ -3,7 +3,7 @@
 -include mk/colors.mk
 
 # Das Progamm
-NAME			=	cub3d
+NAME			=	cub3D
 
 # Version
 BONUS			=	0
@@ -80,7 +80,7 @@ clean:
 	@make clean -C libft
 	@rm -rf mlx
 	
-fclean:	clean
+fclean:	clean cleanpack
 	@echo "$(_AQUAMARINE)$(_BOLD)🗝️ Leaving Wonderland 🎩$(_END)"
 	@rm -rf $(NAME)
 	@make fclean -C libft
@@ -90,7 +90,7 @@ cleanpack:
 	@rm -rf xpm
 
 bonus:
-	@rm $(NAME)
+	@rm -rf $(NAME)
 	@rm -rf $(OBJS_PATH)
 	@rm -rf $(OBJS)
 	make BONUS=1
@@ -98,7 +98,7 @@ bonus:
 re:	fclean all
 
 cle: 
-	@echo "$(_AQUAMARINE)Clearing Cub3d files $(_END)"
+	@echo "$(_AQUAMARINE)Clearing Cub3D files $(_END)"
 	@rm -rf $(OBJS_PATH)
 	@rm -rf $(OBJS)
 	@rm -rf $(NAME)

@@ -1,100 +1,81 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 15:12:50 by tgibier           #+#    #+#             */
-/*   Updated: 2023/10/25 17:39:38 by tgibier          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minimap.h"
 
-void	minimap_to_window(t_world *world)
+t_dir	get_dir(t_complex dir)
 {
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < MINI_HEIGHT)
+	if (fabs(dir.x) < 0.5)
 	{
-		x = -1;
-		while (++x < MINI_WIDTH)
-		{
-			// printf("color shoul be [%d]\n", world->mini_buff[y][x]);
-			world->minimap->addr[MINI_WIDTH * y + x] = world->mini_buff[y][x];
-		}
+		if (dir.y < 0)
+			return (a_up);
+		else
+			return (a_down);
 	}
-	mlx_put_image_to_window(world->mlx_ptr, world->win, \
-		world->minimap->img_ptr, WIDTH - MINI_WIDTH, HEIGHT - MINI_HEIGHT);
-}
-
-void	put_mini_pixel(t_world *world, int x, int y, int color)
-{
-	int		i;
-	int		j;
-	// int		*dst;
-
-	i = y;
-	(void)color;
-	(void)world;
-	while (i < MINI_HEIGHT)
+	else
 	{
-		j = x;
-		while (j < MINI_WIDTH)
-		{
-			// printf("pixel[%d][%d] will be color\n", i, j);
-			world->mini_buff[i][j] = color;
-			j++;
-		}
-		i++;
+		if (dir.x < 0)
+			return (a_left);
+		else
+			return (a_right);
 	}
 }
 
-int	draw_miniplayer(t_world *world)
+void	print_arrow(t_dir	dir)
 {
-	(void)world;
-	return (0);
+	if (dir == a_up)
+		ft_putstr_fd("\e[48;5;140m\e[30m↑\e[49m\e[0m", 1);
+	else if (dir == a_down)
+		ft_putstr_fd("\e[48;5;140m\e[30m↓\e[49m\e[0m", 1);
+	else if (dir == a_left)
+		ft_putstr_fd("\e[48;5;140m\e[30m←\e[49m\e[0m", 1);
+	else
+		ft_putstr_fd("\e[48;5;140m\e[30m→\e[49m\e[0m", 1);
 }
 
-int	draw_minimap(t_world *world)
+void	draw_minimap(t_world *world, t_arrow arrow, int pos_x, int pos_y)
 {
-	int	x;
-	int	y;
-	int	mini_x;
-	int	mini_y;
+	int				i;
+	int				j;
 
-	y = -1;
-	while (world->map[++y])
+	i = -1;
+	while (world->map[++i])
 	{
-		x = -1;
-		while (world->map[y][++x])
+		j = -1;
+		write(1, "[", 1);
+		while (world->map[i][++j])
 		{
-			mini_y = y * 15;
-			mini_x = x * 15;
-			if (world->map[y][x] == '1')
-				put_mini_pixel(world, mini_x, mini_y, COOL_GRAY);
+			if (j == pos_x && i == pos_y)
+				print_arrow(arrow.dir);
+			else if (world->map[i][j] == '1')
+				write(1, "*", 1);
+			else
+				write(1, " ", 1);
 		}
+		write(1, "]\n", 2);
 	}
-	minimap_to_window(world);
-	return (0);
+	i = -1;
+	while (world->map[++i])
+		write(1, "\033[F", 3);
 }
 
 int	minimap(t_world *world)
 {
-	world->minimap->img_ptr = mlx_new_image \
-		(world->mlx_ptr, MINI_WIDTH, MINI_HEIGHT);
-	if (!world->minimap->img_ptr)
-		return (1);
-	world->minimap->addr = (int *)mlx_get_data_addr \
-		(world->minimap->img_ptr, &(world->minimap->bpp), \
-			&(world->minimap->line_len), &(world->minimap->endian));
-	if (!world->minimap->addr)
-		return (1);
-	// printf("curent_player_pos[%f][%f]\n", world->player->pos.y, world->player->pos.x);
-	mlx_destroy_image(world->mlx_ptr, world->minimap->img_ptr);
-	// draw_minimap(world);
+	int				pos_x;
+	int				pos_y;
+	static t_arrow	arrow;
+
+	if (!arrow.old_pos)
+	{
+		arrow.old_pos = (int []){(int)world->player->pos.x, \
+			(int)world->player->pos.y};
+		arrow.dir = get_dir(world->player->dir);
+	}
+	pos_x = (int)world->player->pos.x;
+	pos_y = (int)world->player->pos.y;
+	if ((pos_x == arrow.old_pos[0] && pos_y == arrow.old_pos[1]) \
+		&& arrow.dir == get_dir(world->player->dir))
+		return (0);
+	arrow.old_pos = (int []){(int)world->player->pos.x, \
+		(int)world->player->pos.y};
+	arrow.dir = get_dir(world->player->dir);
+	draw_minimap(world, arrow, pos_x, pos_y);
 	return (0);
 }

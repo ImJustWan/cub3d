@@ -1,4 +1,5 @@
 #include "keys.h"
+#include "minimap.h"
 #include "hooks.h"
 
 int	keys_release(int button, t_world *world)
@@ -40,7 +41,8 @@ int	keys_press(int button, t_world *world)
 void	get_hooks(t_world *world)
 {
 	if (BONUS > 0)
-		mlx_hook(world->win, MotionNotify, PointerMotionMask, handle_mouse, world);
+		mlx_hook(world->win, MotionNotify, \
+			PointerMotionMask, handle_mouse, world);
 	mlx_hook(world->win, DESTROY, 0, clean_exit, world);
 	mlx_hook(world->win, KeyPress, KeyPressMask, keys_press, world);
 	mlx_hook(world->win, KeyRelease, KeyReleaseMask, keys_release, world);
