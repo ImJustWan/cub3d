@@ -90,7 +90,8 @@ texclear:
 	@rm -rf xpm
 
 bonus:
-	make re BONUS=1
+	@make clean
+	make BONUS=1
 
 re:	fclean all
 
