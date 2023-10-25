@@ -5,15 +5,19 @@ int	clean_init_struct(t_world *world)
 	world->img = ft_calloc(1, sizeof(t_img));
 	if (!world->img)
 		return (1);
+	world->minimap = ft_calloc(1, sizeof(t_img));
+	if (!world->img)
+		return (free(world->img), 1);
 	world->ray = ft_calloc(1, sizeof(t_raycast));
 	if (!world->ray)
-		return (free(world->img), 1);
+		return (free(world->minimap), free(world->img), 1);
 	world->setup = ft_calloc(1, sizeof(t_setup));
 	if (!world->setup)
-		return (free(world->img), free(world->ray), 1);
+		return (free(world->minimap), free(world->img), free(world->ray), 1);
 	world->player = ft_calloc(1, sizeof(t_player));
 	if (!world->player)
-		return (free(world->img), free(world->ray), free(world->setup), 1);
+		return (free(world->minimap), free(world->img), \
+			free(world->ray), free(world->setup), 1);
 	return (0);
 }
 

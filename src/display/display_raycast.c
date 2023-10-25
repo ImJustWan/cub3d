@@ -1,5 +1,6 @@
 #include "hooks.h"
 #include "display.h"
+#include "minimap.h"
 
 /*
     the_actual_raycasting
@@ -100,5 +101,14 @@ int	display_raycast(t_world *world)
 	move_player(world, world->player);
 	rotate_player(world, world->player);
 	big_loop(world);
+	minimap(world);
+	return (0);
+}
+
+int	display(t_world *world)
+{
+	move_player(world, world->player);
+	rotate_player(world, world->player);
+	display_raycast(world);
 	return (0);
 }

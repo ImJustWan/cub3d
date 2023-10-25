@@ -50,5 +50,7 @@ int	clean_exit(t_world *world)
 	}
 	if (world->img)
 		free(world->img);
+	if (world->minimap)
+		free(world->minimap);
 	exit (0);
 }

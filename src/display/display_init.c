@@ -47,7 +47,6 @@ int	init_setup(t_world *world, t_setup *setup)
 	int	i;
 	int	j;
 
-	(void)world;
 	setup->orientation = -1;
 	if (world->from_scratch == 1)
 	{
@@ -57,6 +56,13 @@ int	init_setup(t_world *world, t_setup *setup)
 			j = -1;
 			while (++j < WIDTH)
 				world->buffer[i][j] = 0;
+		}
+		i = -1;
+		while (++i < MINI_HEIGHT)
+		{
+			j = -1;
+			while (++j < MINI_WIDTH)
+				world->mini_buff[i][j] = 0;
 		}
 	}
 	return (0);
