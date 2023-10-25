@@ -17,21 +17,11 @@ int	clean_init_struct(t_world *world)
 	return (0);
 }
 
-int	clean_init_textures(t_world *world)
+int	clean_init_buffer(t_world *world)
 {
 	int	i;
 	int	j;
 
-	(*world).texture = (int **)malloc(sizeof(int *) * 4);
-	i = -1;
-	while (++i < 4)
-	{
-		(*world).texture[i] = (int *)malloc(sizeof(int) * \
-			TEXTURE_HEIGHT * TEXTURE_WIDTH);
-		j = -1;
-		while (++j < TEXTURE_HEIGHT * TEXTURE_WIDTH)
-			(*world).texture[i][j] = 0;
-	}
 	i = -1;
 	while (++i < HEIGHT)
 	{
@@ -44,8 +34,9 @@ int	clean_init_textures(t_world *world)
 
 int	clean_init(t_world *world)
 {
-	clean_init_struct(world);
-	clean_init_textures(world);
+	if (clean_init_struct(world))
+		return (1);
+	clean_init_buffer(world);
 	world->mlx_ptr = NULL;
 	world->win = NULL;
 	world->time = 0;

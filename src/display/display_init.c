@@ -80,11 +80,13 @@ int	init_mlx(t_world *world)
 	return (0);
 }
 
-void	display_init(t_world *world)
+int	display_init(t_world *world)
 {
 	init_mlx(world);
 	init_raycast(world, world->ray);
 	init_setup(world, world->setup);
 	init_player(world, world->player);
-	init_textures(world, world->texture);
+	if (init_textures(world))
+		return (1);
+	return (0);
 }

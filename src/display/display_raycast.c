@@ -12,7 +12,8 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 	int	y;
 	int	color;
 
-	ray->step = 1.0 * TEXTURE_HEIGHT / ray->wall_height;
+	ray->step = 1.0 * world->tab_tex[ray->index_texture].height / \
+		ray->wall_height;
 	ray->ray_height = ((double)ray->draw_start - \
 		((double)HEIGHT / 2) + (ray->wall_height / 2)) * ray->step;
 	y = -1;
@@ -20,10 +21,12 @@ void	the_actual_raycasting(t_world *world, t_raycast *ray, int x)
 		world->buffer[y][x] = world->setup->f;
 	while (y < ray->draw_end)
 	{
-		ray->y_on_tex = (int)ray->ray_height % TEXTURE_HEIGHT;
+		ray->y_on_tex = (int)ray->ray_height % \
+			world->tab_tex[ray->index_texture].height;
 		ray->ray_height += ray->step;
-		color = world->texture[ray->index_texture] \
-			[TEXTURE_HEIGHT * ray->y_on_tex + ray->x_on_tex];
+		color = world->tab_tex[ray->index_texture].texture \
+			[(world->tab_tex[ray->index_texture].height) * \
+				ray->y_on_tex + ray->x_on_tex];
 		world->buffer[y][x] = color;
 		world->from_scratch = 1;
 		y++;

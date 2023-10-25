@@ -172,10 +172,12 @@ void	start_end(t_world *world, t_raycast *ray)
 		ray->wall_pos = world->player->pos.x + \
 			(ray->wall_dist * ray->ray_dir.x);
 	ray->wall_pos -= floor(ray->wall_pos);
-	ray->x_on_tex = (int)(ray->wall_pos * (double)TEXTURE_WIDTH);
+	ray->x_on_tex = (int)(ray->wall_pos * \
+		(double)world->tab_tex[ray->index_texture].width);
 	if ((ray->side == 0 && ray->ray_dir.x > 0)
 		|| (ray->side == 1 && ray->ray_dir.y < 0))
-		ray->x_on_tex = TEXTURE_WIDTH - 1 - ray->x_on_tex;
+		ray->x_on_tex = world->tab_tex[ray->index_texture].width - 1 \
+			- ray->x_on_tex;
 	ray->draw_start = (-ray->wall_height / 2) + (HEIGHT / 2);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;

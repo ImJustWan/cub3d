@@ -12,7 +12,8 @@ int	main(int argc, char **argv)
 	clean_init(&world);
 	if (parsing(&world, argv))
 		clean_exit(&world);
-	loop(&world);
+	if (loop(&world))
+		clean_exit(&world);
 	clean_exit(&world);
 	return (1);
 }

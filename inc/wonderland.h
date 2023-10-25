@@ -101,6 +101,14 @@ typedef struct s_setup
 	t_complex	dir;
 }	t_setup;
 
+typedef struct s_texture
+{
+	int		index;
+	int		width;
+	int		height;
+	int		*texture;
+}	t_texture;
+
 typedef struct s_world
 {
 	void		*mlx_ptr;
@@ -110,9 +118,9 @@ typedef struct s_world
 	double		old_time;
 	int			from_scratch;
 	int			buffer[HEIGHT][WIDTH];
-	int			**texture;
 	t_img		*img;
 	t_img		*background;
+	t_texture	tab_tex[4];
 	t_player	*player;
 	t_setup		*setup;
 	t_raycast	*ray;

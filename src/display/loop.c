@@ -8,7 +8,8 @@ int	loop(t_world *world)
 	i = -1;
 	while (world->map[++i])
 		printf("map[%d] is [%s]\n", i, world->map[i]);
-	display_init(world);
+	if (display_init(world))
+		return (1);
 	get_hooks(world);
 	display_raycast(world);
 	mlx_loop_hook(world->mlx_ptr, display_raycast, world);
