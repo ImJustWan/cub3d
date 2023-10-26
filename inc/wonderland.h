@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wonderland.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:37:55 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 10:38:05 by mrony            ###   ########.fr       */
+/*   Updated: 2023/10/26 10:57:56 by tgibier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ typedef enum e_direction
 
 typedef struct s_arrow
 {
-	int		*old_pos;
+	int		old_pos_x;
+	int		old_pos_y;
 	t_dir	dir;
 }t_arrow;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/26 10:42:36 by tgibier           #+#    #+#             */
+/*   Updated: 2023/10/26 11:00:27 by tgibier          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "bonus.h"
 
 t_dir	get_dir(t_complex dir)
@@ -62,19 +74,19 @@ int	minimap(t_world *world)
 	int				pos_y;
 	static t_arrow	arrow;
 
-	if (!arrow.old_pos)
+	if (!arrow.old_pos_x && !arrow.old_pos_y)
 	{
-		arrow.old_pos = (int []){(int)world->player->pos.x, \
-			(int)world->player->pos.y};
+		arrow.old_pos_x = (int)world->player->pos.x;
+		arrow.old_pos_y = (int)world->player->pos.y;
 		arrow.dir = get_dir(world->player->dir);
 	}
 	pos_x = (int)world->player->pos.x;
 	pos_y = (int)world->player->pos.y;
-	if ((pos_x == arrow.old_pos[0] && pos_y == arrow.old_pos[1]) \
-		&& arrow.dir == get_dir(world->player->dir))
+	if ((pos_x == arrow.old_pos_x && pos_y == arrow.old_pos_y \
+		&& arrow.dir == get_dir(world->player->dir)))
 		return (0);
-	arrow.old_pos = (int []){(int)world->player->pos.x, \
-		(int)world->player->pos.y};
+	arrow.old_pos_x = (int)world->player->pos.x;
+	arrow.old_pos_y = (int)world->player->pos.y;
 	arrow.dir = get_dir(world->player->dir);
 	draw_minimap(world, arrow, pos_x, pos_y);
 	return (0);
