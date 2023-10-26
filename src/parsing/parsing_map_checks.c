@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map_checks.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:38:34 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 10:38:35 by mrony            ###   ########.fr       */
+/*   Updated: 2023/10/26 14:57:22 by tgibier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	set_player_dir(t_world *world)
 	}
 	if (world->setup->orientation == EAST)
 	{
-		world->setup->dir.x = 1;
+		world->setup->dir.x = -1;
 		world->player->cam_plane.x = 0.00;
 		world->player->cam_plane.y = -0.66;
 	}
 	if (world->setup->orientation == WEST)
 	{
-		world->setup->dir.x = -1;
+		world->setup->dir.x = 1;
 		world->player->cam_plane.x = 0;
 		world->player->cam_plane.y = 0.66;
 	}

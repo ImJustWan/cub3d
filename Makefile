@@ -94,6 +94,9 @@ bonus:
 	@rm -rf $(OBJS_PATH)
 	@rm -rf $(OBJS)
 	make BONUS=1
+	@tput civis
+
+# @tput cnorm
 
 re:	fclean all
 
