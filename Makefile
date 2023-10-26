@@ -80,7 +80,7 @@ clean:
 	@make clean -C libft
 	@rm -rf mlx
 	
-fclean:	clean cleanpack
+fclean:	clean 
 	@echo "$(_AQUAMARINE)$(_BOLD)🗝️ Leaving Wonderland 🎩$(_END)"
 	@rm -rf $(NAME)
 	@make fclean -C libft

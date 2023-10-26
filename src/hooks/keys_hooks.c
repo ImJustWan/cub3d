@@ -1,6 +1,6 @@
 #include "keys.h"
-#include "minimap.h"
 #include "hooks.h"
+#include "bonus.h"
 
 int	keys_release(int button, t_world *world)
 {

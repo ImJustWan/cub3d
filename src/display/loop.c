@@ -1,5 +1,4 @@
 #include "display.h"
-#include "minimap.h"
 #include "hooks.h"
 
 int	loop(t_world *world)

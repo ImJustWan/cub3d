@@ -1,4 +1,5 @@
 #include "hooks.h"
+#include "bonus.h"
 
 int	handle_mouse(int x, int y, t_world *world)
 {

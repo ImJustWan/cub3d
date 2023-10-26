@@ -1,4 +1,4 @@
-#include "minimap.h"
+#include "bonus.h"
 
 t_dir	get_dir(t_complex dir)
 {

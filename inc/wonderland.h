@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wonderland.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/26 10:37:55 by mrony             #+#    #+#             */
+/*   Updated: 2023/10/26 10:38:05 by mrony            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WONDERLAND_H
 # define WONDERLAND_H
 
@@ -57,17 +69,6 @@ typedef struct s_arrow
 	int		*old_pos;
 	t_dir	dir;
 }t_arrow;
-
-typedef enum e_draw_color
-{
-	RED = 0x00FF0000,
-	BLUE = 0x000000FF,
-	BLACK = 0x00000000,
-	PINK = 0x00FF00FF,
-	ORANGE = 0x00DF7401,
-	MOUNTBATTEN = 0x00997A8D,
-	COOL_GRAY = 0x008C92AC
-}	t_draw_color;
 
 typedef struct s_complex
 {

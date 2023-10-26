@@ -1,5 +1,4 @@
 #include "hooks.h"
-#include "minimap.h"
 
 void	move_left(t_world *world)
 {

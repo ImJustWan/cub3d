@@ -1,6 +1,6 @@
 #include "hooks.h"
 #include "display.h"
-#include "minimap.h"
+#include "bonus.h"
 
 /*
     the_actual_raycasting
