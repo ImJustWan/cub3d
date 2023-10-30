@@ -78,12 +78,12 @@ clean:
 	@rm -rf $(OBJS_PATH)
 	@rm -rf $(OBJS)
 	@make clean -C libft
-	@rm -rf mlx
 	
 fclean:	clean 
 	@echo "$(_AQUAMARINE)$(_BOLD)🗝️ Leaving Wonderland 🎩$(_END)"
 	@rm -rf $(NAME)
 	@make fclean -C libft
+	@rm -rf mlx
 
 cleanpack:
 	@rm -rf des
@@ -110,11 +110,6 @@ cle:
 
 cub: cle all
 
-gmk:
-		@if [ -d mk ];then echo ok;else mkdir mk;fi
-		@find -path './src/*' -name '*.c' | sed 's/^/SRCS += /' > mk/sources.mk
-		@find -path './inc/*' -name '*.h' | sed 's/^/INCLUDES += /' > mk/includes.mk
-
 -include $(DEPS)
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re cub cle bonus cleanpack pack
