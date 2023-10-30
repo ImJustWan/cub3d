@@ -6,11 +6,25 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:38:41 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 10:38:42 by mrony            ###   ########.fr       */
+/*   Updated: 2023/10/30 20:10:55 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int	valid_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while(line[i])
+	{
+		if (!ft_strchr("10NSWE \n", line[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
 
 t_list	*isolate_map(t_list *read)
 {
@@ -23,9 +37,11 @@ t_list	*isolate_map(t_list *read)
 	{
 		while (empty_line((char *)cpy->content) == TRUE)
 			cpy = cpy->prev;
-		while (empty_line((char *)cpy->content) == FALSE)
+		while (empty_line((char *)cpy->content) == FALSE
+		&& (valid_line((char *)cpy->content) == TRUE))
 			cpy = cpy->prev;
-		if (empty_line((char *)cpy->content) == TRUE)
+		if (empty_line((char *)cpy->content) == TRUE 
+		|| (valid_line((char *)cpy->content) == FALSE))
 		{
 			map = cpy->next;
 			map->prev = NULL;

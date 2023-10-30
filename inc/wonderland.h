@@ -6,7 +6,7 @@
 /*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:37:55 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 15:01:34 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/10/30 09:49:25 by tgibier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define EAST 2	
 # define WEST 3
 
-# define MOV_SPEED 0.004
-# define ROT_SPEED 0.004
+# define MOV_SPEED 0.003
+# define ROT_SPEED 0.003
 # define EDG_DIST 20
 
 # ifndef BONUS

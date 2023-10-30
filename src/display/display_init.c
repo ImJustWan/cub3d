@@ -6,7 +6,7 @@
 /*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:42:43 by tgibier           #+#    #+#             */
-/*   Updated: 2023/10/26 10:42:44 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/10/27 14:09:43 by tgibier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	init_mlx(t_world *world)
 
 int	display_init(t_world *world)
 {
-	init_mlx(world);
+	if (init_mlx(world))
+		return (1);
 	init_raycast(world, world->ray);
 	init_setup(world, world->setup);
 	init_player(world, world->player);

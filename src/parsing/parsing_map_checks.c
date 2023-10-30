@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:38:34 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 15:06:29 by mrony            ###   ########.fr       */
+/*   Updated: 2023/10/30 20:32:54 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ int	check_surroundings(char **map, int i, int j)
 	if (i == 0 || j == 0 || i == ft_table_size(map)
 		|| j == (int)ft_strlen(map[i]))
 		return (FAIL);
-	if (!map[i - 1] || !map[i - 1][j] || !(ft_strchr("10NSEW", map[i - 1][j])))
+	if (!map[i - 1] || j > (int)ft_strlen(map[i - 1])
+	|| !map[i - 1][j] || !(ft_strchr("10NSEW", map[i - 1][j])))
 		return (FAIL);
-	if (!map[i + 1] || !map[i + 1][j] || !(ft_strchr("10NSEW", map[i + 1][j])))
+	if (!map[i + 1] || j > (int)ft_strlen(map[i + 1])
+	|| !map[i + 1][j] || !(ft_strchr("10NSEW", map[i + 1][j])))
 		return (FAIL);
 	if (!map[i][j - 1] || !(ft_strchr("10NSEW", map[i][j - 1])))
 		return (FAIL);
@@ -44,15 +46,15 @@ void	set_player_dir(t_world *world)
 	}
 	if (world->setup->orientation == EAST)
 	{
-		world->setup->dir.x = -1;
+		world->setup->dir.x = 1;
 		world->player->cam_plane.x = 0.00;
-		world->player->cam_plane.y = -0.66;
+		world->player->cam_plane.y = 0.66;
 	}
 	if (world->setup->orientation == WEST)
 	{
-		world->setup->dir.x = 1;
+		world->setup->dir.x = -1;
 		world->player->cam_plane.x = 0;
-		world->player->cam_plane.y = 0.66;
+		world->player->cam_plane.y = -0.66;
 	}
 }
 

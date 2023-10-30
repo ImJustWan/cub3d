@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:37:44 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 10:37:45 by mrony            ###   ########.fr       */
+/*   Updated: 2023/10/30 20:18:15 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define MTX "Missing texture(s)"
 # define IID "Invalid identifyier"
 # define MFP "Missing identifyier or file path"
-# define MIF "To many information"
+# define MIF "Too many information"
 # define DPX "Duplicate texture assignment"
 
 void	ft_error_msg(char *err, int *ptr, char *arg, char *str);

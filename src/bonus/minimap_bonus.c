@@ -6,7 +6,7 @@
 /*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:42:36 by tgibier           #+#    #+#             */
-/*   Updated: 2023/10/26 14:54:06 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/10/30 09:45:52 by tgibier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ t_dir	get_dir(t_complex dir)
 	}
 }
 
-void	print_arrow(t_dir	dir)
+void	print_arrow(t_dir dir)
 {
 	if (dir == a_up)
-		ft_putstr_fd("\e[48;5;140m\e[30m🐉\e[49m\e[0m", 1);
+		ft_putstr_fd("\e[48;5;140m\e[30m↑\e[49m\e[0m", 1);
 	else if (dir == a_down)
-		ft_putstr_fd("\e[48;5;140m\e[30m🐉\e[49m\e[0m", 1);
+		ft_putstr_fd("\e[48;5;140m\e[30m↓\e[49m\e[0m", 1);
 	else if (dir == a_left)
-		ft_putstr_fd("\e[48;5;140m\e[30m🐉\e[49m\e[0m", 1);
+		ft_putstr_fd("\e[48;5;140m\e[30m←\e[49m\e[0m", 1);
 	else
-		ft_putstr_fd("\e[48;5;140m\e[30m🐉\e[49m\e[0m", 1);
+		ft_putstr_fd("\e[48;5;140m\e[30m→\e[49m\e[0m", 1);
 }
 
 void	draw_minimap(t_world *world, t_arrow arrow, int pos_x, int pos_y)
@@ -56,12 +56,11 @@ void	draw_minimap(t_world *world, t_arrow arrow, int pos_x, int pos_y)
 		while (world->map[i][++j])
 		{
 			if (j == pos_x && i == pos_y)
-				write(1, " 🐉 ", 5);
-				// print_arrow(arrow.dir);
+				print_arrow(arrow.dir);
 			else if (world->map[i][j] == '1')
-				write(1, " **", 4);
+				write(1, "*", 1);
 			else
-				write(1, "   ", 4);
+				write(1, " ", 1);
 		}
 		write(1, "]\n", 2);
 	}
@@ -93,3 +92,16 @@ int	minimap(t_world *world)
 	draw_minimap(world, arrow, pos_x, pos_y);
 	return (0);
 }
+
+/*
+while (world->map[i][++j])
+{
+	if (j == pos_x && i == pos_y)
+		write(1, " 🐉 ", 5);
+		// print_arrow(arrow.dir);
+	else if (world->map[i][j] == '1')
+		write(1, " **", 4);
+	else
+		write(1, "   ", 4);
+}
+*/

@@ -88,6 +88,7 @@ fclean:	clean
 cleanpack:
 	@rm -rf des
 	@rm -rf xpm
+	@rm -rf pack
 
 bonus:
 	@rm -rf $(NAME)

@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:38:27 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 10:38:28 by mrony            ###   ########.fr       */
+/*   Updated: 2023/10/30 20:35:11 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int	color_save(t_world *world, char **split)
 	r = ft_atoi_cub(colors[0]);
 	g = ft_atoi_cub(colors[1]);
 	b = ft_atoi_cub(colors[2]);
-	if (r < 0 || b < 0 || g < 0)
+	if (r < 0 || b < 0 || g < 0 || r > 255 || b > 255 || g > 255)
 		return (ft_free(colors), ft_error_msg(ERR, NULL, IFL, COL), FAIL);
-	if (strcmp(split[0], "C\0"))
+	if (strcmp(split[0], "C\0") && world->setup->c == -1)
 		world->setup->c = ft_encode_rgb(r, g, b);
-	else if (strcmp(split[0], "F\0"))
+	else if (strcmp(split[0], "F\0") && world->setup->f == -1)
 		world->setup->f = ft_encode_rgb(r, g, b);
 	else
 		return (ft_free(colors), ft_error_msg(ERR, NULL, IID, COL), FAIL);
