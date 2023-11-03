@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_textures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:01:11 by tgibier           #+#    #+#             */
-/*   Updated: 2023/10/26 11:01:12 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:24:00 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ int	load_texture(t_world *world, t_img *img, char *path, int i)
 
 	img->img_ptr = mlx_xpm_file_to_image(world->mlx_ptr,
 			path, &img->width, &img->height);
+	if (!img->img_ptr)
+		return (1);
 	img->addr = (int *)mlx_get_data_addr(img->img_ptr,
 			&img->bpp, &img->line_len, &img->endian);
+	if (!img->addr)
+		return (1);
 	if (fill_texture_info(world, img, i))
 		return (1);
 	y = -1;
@@ -69,7 +73,8 @@ int	get_texture(t_world *world, int i)
 		res = load_texture(world, &img, world->setup->ea, i);
 	if (i == WEST)
 		res = load_texture(world, &img, world->setup->we, i);
-	mlx_destroy_image(world->mlx_ptr, img.img_ptr);
+	if (res == 0)
+		mlx_destroy_image(world->mlx_ptr, img.img_ptr);
 	return (res);
 }
 

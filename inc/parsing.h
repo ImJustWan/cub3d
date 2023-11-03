@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:37:51 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 10:37:52 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/03 14:10:21 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		file_name(char **argv);
 int		read_file(char **argv, t_list **read);
 
 // parsing_map.c
-t_list	*isolate_map(t_list *read);
+t_list	*isolate_map(t_list *read, t_list *map);
 char	**map_fill(char **map, t_list *map_lst, int size);
 char	**build_map(t_world *world, t_list *map_lst);
 int		parsing_map(t_world *world, t_list *read);

@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:42:02 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 10:42:03 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/03 14:46:25 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ void	clean_mlx(t_world *world)
 	if (world->win)
 		mlx_destroy_window(world->mlx_ptr, world->win);
 	mlx_loop_end(world->mlx_ptr);
-	mlx_destroy_display(world->mlx_ptr);
+	if (world->mlx_ptr != NULL)
+		mlx_destroy_display(world->mlx_ptr);
 	free(world->mlx_ptr);
 }
 
-int	clean_exit(t_world *world)
+int	clean_exit(t_world *world, int ex)
 {
 	if (!world)
 		exit (0);
@@ -59,7 +60,7 @@ int	clean_exit(t_world *world)
 		ft_free(world->map);
 	if (world->setup)
 		free_setup(world->setup);
-	if (world->player)
+	if (world->player)wall_pos
 		free(world->player);
 	if (world->mlx_ptr)
 		clean_mlx(world);
@@ -68,5 +69,5 @@ int	clean_exit(t_world *world)
 	if (world->minimap)
 		free(world->minimap);
 	printf("\e[?25h");
-	exit (0);
+	exit (ex);
 }

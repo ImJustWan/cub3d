@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:43:43 by tgibier           #+#    #+#             */
-/*   Updated: 2023/10/26 10:43:44 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/11/03 11:45:01 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	main(int argc, char **argv)
 	if (clean_init(&world))
 		return (printf("\e[?25h"), 1);
 	if (parsing(&world, argv) && printf("\e[?25h"))
-		clean_exit(&world);
+		clean_exit(&world, 1);
 	if (loop(&world) && printf("\e[?25h"))
-		clean_exit(&world);
+		clean_exit(&world, 1);
 	printf("\e[?25h");
-	clean_exit(&world);
-	return (1);
+	clean_exit(&world, 0);
+	return (0);
 }

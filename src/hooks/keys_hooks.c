@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:43:02 by tgibier           #+#    #+#             */
-/*   Updated: 2023/10/26 10:43:03 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/11/03 11:45:13 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	keys_press(int button, t_world *world)
 	if (button == KEY_D)
 		world->player->move.x = 1;
 	if (button == ESC)
-		clean_exit(world);
+		clean_exit(world, 0);
 	return (0);
 }
 

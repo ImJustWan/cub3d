@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:38:27 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/30 20:35:11 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/03 14:12:27 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,26 @@ int	ft_atoi_cub(const char *nptr)
 	return ((int)res);
 }
 
+int	split_check_int(char **split)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (split[i])
+	{
+		j = 0;
+		while (split[i][j])
+		{
+			if (!ft_isdigit(split[i][j]) && (split[i][j] != '+' || j != 0))
+				return (FALSE);
+			j++;
+		}
+		i++;
+	}
+	return (TRUE);
+}
+
 int	ft_encode_rgb(int red, int green, int blue)
 {
 	return (red << 16 | green << 8 | blue);
@@ -55,7 +75,7 @@ int	color_save(t_world *world, char **split)
 	colors = ft_split(split[1], ',');
 	if (!colors)
 		return (ft_error_msg(ERR, NULL, IFL, MAL), FAIL);
-	if (ft_table_size(colors) != 3)
+	if (!split_check_int(colors) || ft_table_size(colors) != 3)
 		return (ft_free(colors), ft_error_msg(ERR, NULL, IFL, MSC), FAIL);
 	r = ft_atoi_cub(colors[0]);
 	g = ft_atoi_cub(colors[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wonderland.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:37:55 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/30 20:44:52 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/11/03 11:44:43 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ typedef struct s_world
 }	t_world;
 
 int		clean_init(t_world *world);
-int		clean_exit(t_world *world);
+int		clean_exit(t_world *world, int ex);
 
 // utils.c
 void	ft_free(char **split);

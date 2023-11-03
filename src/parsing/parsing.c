@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:39:14 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/26 10:39:35 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/03 11:45:25 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	parsing(t_world *world, char **argv)
 	{
 		if (read)
 			ft_clear(read);
-		clean_exit(world);
+		clean_exit(world, 1);
 	}
 	if (parsing_map(world, read))
 		return (ft_clear(read), FAIL);

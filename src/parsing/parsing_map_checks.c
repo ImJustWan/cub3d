@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:38:34 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/30 20:32:54 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/03 14:11:43 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	check_surroundings(char **map, int i, int j)
 		|| j == (int)ft_strlen(map[i]))
 		return (FAIL);
 	if (!map[i - 1] || j > (int)ft_strlen(map[i - 1])
-	|| !map[i - 1][j] || !(ft_strchr("10NSEW", map[i - 1][j])))
+		|| !map[i - 1][j] || !(ft_strchr("10NSEW", map[i - 1][j])))
 		return (FAIL);
 	if (!map[i + 1] || j > (int)ft_strlen(map[i + 1])
-	|| !map[i + 1][j] || !(ft_strchr("10NSEW", map[i + 1][j])))
+		|| !map[i + 1][j] || !(ft_strchr("10NSEW", map[i + 1][j])))
 		return (FAIL);
 	if (!map[i][j - 1] || !(ft_strchr("10NSEW", map[i][j - 1])))
 		return (FAIL);
@@ -101,7 +101,8 @@ int	map_verif(t_world *world, char **map, int i, int j)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '1' || map[i][j] == ' ' )
+			if (map[i][j] == '1' || map[i][j] == 32
+			|| (map[i][j] > 9 && map[i][j] < 13))
 				j++;
 			else if (ft_strchr("0NSWE", map[i][j]) != NULL)
 			{

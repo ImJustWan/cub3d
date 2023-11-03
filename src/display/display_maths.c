@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_maths.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgibier <tgibier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:42:47 by tgibier           #+#    #+#             */
-/*   Updated: 2023/10/26 10:42:48 by tgibier          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:43:15 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ void	start_end(t_world *world, t_raycast *ray)
 		ray->wall_pos = world->player->pos.x + \
 			(ray->wall_dist * ray->ray_dir.x);
 	ray->wall_pos -= floor(ray->wall_pos);
+	ray->wall_pos = 1 - ray->wall_pos;
 	ray->x_on_tex = (int)(ray->wall_pos * \
 		(double)world->tab_tex[ray->index_texture].width);
 	if ((ray->side == 0 && ray->ray_dir.x > 0)

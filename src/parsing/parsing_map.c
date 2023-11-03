@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:38:41 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/30 20:10:55 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/03 14:10:04 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,34 @@ int	valid_line(char *line)
 	int	i;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
-		if (!ft_strchr("10NSWE \n", line[i]))
+		if (!ft_strchr("10NSWE \n\t\v\f", line[i]))
 			return (FALSE);
 		i++;
 	}
 	return (TRUE);
 }
 
-t_list	*isolate_map(t_list *read)
+t_list	*isolate_map(t_list *read, t_list *map)
 {
 	t_list	*cpy;
-	t_list	*map;
 
-	map = NULL;
 	cpy = ft_lstlast(read);
 	while (cpy && cpy->prev)
 	{
-		while (empty_line((char *)cpy->content) == TRUE)
+		while (cpy && cpy->prev && empty_line((char *)cpy->content) == TRUE)
 			cpy = cpy->prev;
-		while (empty_line((char *)cpy->content) == FALSE
-		&& (valid_line((char *)cpy->content) == TRUE))
+		while (cpy && empty_line((char *)cpy->content) == FALSE
+			&& (valid_line((char *)cpy->content) == TRUE))
 			cpy = cpy->prev;
-		if (empty_line((char *)cpy->content) == TRUE 
-		|| (valid_line((char *)cpy->content) == FALSE))
+		if (!cpy)
+			return (NULL);
+		if (cpy && (empty_line((char *)cpy->content) == TRUE
+				|| (valid_line((char *)cpy->content) == FALSE)))
 		{
+			if (!cpy->next)
+				return (NULL);
 			map = cpy->next;
 			map->prev = NULL;
 			cpy->next = NULL;
@@ -93,9 +95,13 @@ char	**build_map(t_world *world, t_list *map_lst)
 int	parsing_map(t_world *world, t_list *read)
 {
 	t_list	*map_lst;
+	t_list	*map;
 
+	map = NULL;
 	(void)world;
-	map_lst = isolate_map(read);
+	map_lst = isolate_map(read, map);
+	if (!map_lst)
+		return (ft_error_msg(ERR, NULL, IMP, EMF), FAIL);
 	world->map = build_map(world, map_lst);
 	if (!world->map)
 		return (ft_clear(map_lst), FAIL);

@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:37:44 by mrony             #+#    #+#             */
-/*   Updated: 2023/10/30 20:18:15 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/03 13:32:27 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@
 # define NPL "No player on the map"
 # define MPL "Too many players on the map"
 # define WAL "The map is not enclosed by walls"
+# define EMF "Error on map file"
 
 	// Textures & colors errors
 # define IFL "\1\033[1m\2Invalid file\1\033[0m\2"
-# define XPM "Incorect file extension"
+# define XPM "Incorrect file extension"
 # define COL "Invalid colors"
 # define MSC "Missing color(s)"
 # define MTX "Missing texture(s)"
