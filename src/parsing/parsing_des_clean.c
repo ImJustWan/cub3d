@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:38:24 by mrony             #+#    #+#             */
-/*   Updated: 2023/11/03 14:11:55 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/06 10:47:06 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_list	*remove_empty_lines(t_list *read)
 		if (empty_line(read->content))
 		{
 			if (read && !read->prev && !read->next)
-				return (NULL);
+				return (ft_lstdelone(read, free), NULL);
 			if (read && !read->prev)
 				head = remove_first(&read);
 			else if (read && !read->next)
