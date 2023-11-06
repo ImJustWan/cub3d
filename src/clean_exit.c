@@ -6,7 +6,7 @@
 /*   By: mrony <mrony@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:42:02 by mrony             #+#    #+#             */
-/*   Updated: 2023/11/03 14:46:25 by mrony            ###   ########.fr       */
+/*   Updated: 2023/11/03 15:19:01 by mrony            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	clean_exit(t_world *world, int ex)
 		ft_free(world->map);
 	if (world->setup)
 		free_setup(world->setup);
-	if (world->player)wall_pos
+	if (world->player)
 		free(world->player);
 	if (world->mlx_ptr)
 		clean_mlx(world);
